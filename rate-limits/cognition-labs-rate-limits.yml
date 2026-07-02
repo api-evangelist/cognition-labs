@@ -1,0 +1,78 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Cognition Labs
+providerId: cognition-labs
+created: '2026-07-02'
+modified: '2026-07-02'
+reconciled: false
+tags:
+- AI
+- AI Agent
+- Devin
+- Rate Limiting
+- Quotas
+description: >-
+  Cognition does not publish fixed numeric per-minute or per-day request-rate
+  limits for the Devin API (v1, v2, or v3). Instead, usage is governed by
+  Agent Compute Unit (ACU) consumption against a plan's quota or an
+  Enterprise order-form allowance: Devin explicitly documents "no concurrent
+  session limits," so the practical ceiling on how much work can run in
+  parallel is a customer's own ACU budget and Enterprise-configured
+  per-organization consumption caps rather than a request-throttling gate.
+  Structured output schemas are capped at 64KB and session tags at 50 entries,
+  which are the only numeric ceilings found in the documented request payloads.
+notes: >-
+  No documented endpoint returns rate-limit headers (e.g. X-RateLimit-*) and
+  no 429 behavior is described in the public API reference or the Common
+  Issues troubleshooting page as of the review date; verify directly with
+  Cognition/Devin support before assuming request-level throttling exists.
+sources:
+- https://docs.devin.ai/api-reference/overview
+- https://docs.devin.ai/api-reference/authentication
+- https://docs.devin.ai/admin/billing/usage
+- https://docs.devin.ai/admin/billing/enterprise
+- https://docs.devin.ai/admin/common-issues
+responseCodes:
+  throttled: not documented
+limits:
+- name: Concurrent Sessions
+  scope: account
+  metric: sessions
+  limit: none documented
+  notes: Devin's own docs state there are no concurrent session limits; work can be split across multiple simultaneous sessions.
+- name: Plan ACU Quota
+  scope: account
+  metric: acu
+  limit: per plan (daily and/or weekly, see Plans)
+  notes: Pro and Teams full seats have daily and weekly allowances; Max has a weekly-only allowance with no daily cap.
+- name: Enterprise Organization Consumption Cap
+  scope: organization
+  metric: acu
+  limit: admin-configured
+  notes: Enterprise admins can set a per-organization ACU cap; when reached, all Devin activity in that organization stops until an admin intervenes.
+- name: Session Tags
+  scope: request
+  metric: tags
+  limit: 50
+  notes: Maximum of 50 tags accepted on session create and on the update-tags endpoint.
+- name: Structured Output Schema Size
+  scope: request
+  metric: bytes
+  limit: 65536
+  notes: JSON Schema (Draft 7) passed as structured_output_schema on session create is capped at 64KB.
+- name: API Request Rate
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No numeric per-minute/per-day request rate limit or 429 policy is documented for v1, v2, or v3 endpoints.
+policies:
+- name: ACU-Gated Rather Than Request-Gated
+  description: The primary throttle on Devin usage is ACU quota/consumption-cap exhaustion, not HTTP request-rate limiting.
+- name: Sleep on Inactivity
+  description: A session enters sleep mode after roughly 0.1 ACU of inactivity and consumes zero units while asleep; sending a message wakes it.
+- name: Validation Before Throttling
+  description: Documented failure modes for these endpoints are 422 validation errors on malformed payloads, not 429 throttling responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

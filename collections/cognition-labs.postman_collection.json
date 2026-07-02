@@ -1,0 +1,308 @@
+{
+  "info": {
+    "name": "Devin API (Cognition Labs)",
+    "description": "Create and drive Devin sessions programmatically - sessions, messages, attachments, knowledge, playbooks, and secrets on the legacy v1 surface. Base URL: https://api.devin.ai/v1. All requests require a Bearer token (apk_user_*/apk_* legacy key, or cog_ service-user/personal access token on the v3 surface).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{bearerToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.devin.ai/v1", "type": "string" },
+    { "key": "bearerToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Sessions",
+      "item": [
+        {
+          "name": "Create a new Devin session",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"prompt\": \"Fix the failing tests in the payments module\",\n  \"idempotent\": false\n}" },
+            "url": { "raw": "{{baseUrl}}/sessions", "host": ["{{baseUrl}}"], "path": ["sessions"] },
+            "description": "Creates a new Devin session from a natural-language prompt."
+          }
+        },
+        {
+          "name": "List sessions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/sessions?limit=100&offset=0", "host": ["{{baseUrl}}"], "path": ["sessions"], "query": [{ "key": "limit", "value": "100" }, { "key": "offset", "value": "0" }] },
+            "description": "Lists sessions for the organization, with optional filters."
+          }
+        },
+        {
+          "name": "Retrieve session details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/sessions/:session_id", "host": ["{{baseUrl}}"], "path": ["sessions", ":session_id"], "variable": [{ "key": "session_id", "value": "" }] },
+            "description": "Retrieves full status, message history, and structured output for a session."
+          }
+        },
+        {
+          "name": "Update session tags",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tags\": [\"payments\", \"bugfix\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/sessions/:session_id/tags", "host": ["{{baseUrl}}"], "path": ["sessions", ":session_id", "tags"], "variable": [{ "key": "session_id", "value": "" }] },
+            "description": "Replaces the tag list on a session (maximum 50 tags)."
+          }
+        },
+        {
+          "name": "Terminate a session",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/sessions/:session_id", "host": ["{{baseUrl}}"], "path": ["sessions", ":session_id"], "variable": [{ "key": "session_id", "value": "" }] },
+            "description": "Terminates a running session."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Send a message to a session",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"Also add a changelog entry\"\n}" },
+            "url": { "raw": "{{baseUrl}}/sessions/:session_id/message", "host": ["{{baseUrl}}"], "path": ["sessions", ":session_id", "message"], "variable": [{ "key": "session_id", "value": "" }] },
+            "description": "Sends a follow-up message into a running session."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Attachments",
+      "item": [
+        {
+          "name": "Upload a file for Devin to work with",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": "" }] },
+            "url": { "raw": "{{baseUrl}}/attachments", "host": ["{{baseUrl}}"], "path": ["attachments"] },
+            "description": "Uploads a file and returns its URL for use as ATTACHMENT:\"{file_url}\" in a prompt."
+          }
+        },
+        {
+          "name": "Download an attachment file",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/attachments/:attachment_id", "host": ["{{baseUrl}}"], "path": ["attachments", ":attachment_id"], "variable": [{ "key": "attachment_id", "value": "" }] },
+            "description": "Downloads an attachment file by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Knowledge",
+      "item": [
+        {
+          "name": "List all knowledge",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/knowledge", "host": ["{{baseUrl}}"], "path": ["knowledge"] },
+            "description": "Lists all knowledge entries and folders for the organization."
+          }
+        },
+        {
+          "name": "Create knowledge entry",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Deploy process\",\n  \"body\": \"Always run migrations before deploying the API service.\",\n  \"trigger_description\": \"When a session touches deployment scripts.\"\n}" },
+            "url": { "raw": "{{baseUrl}}/knowledge", "host": ["{{baseUrl}}"], "path": ["knowledge"] },
+            "description": "Creates a new knowledge entry."
+          }
+        },
+        {
+          "name": "Update knowledge entry",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/knowledge/:knowledge_id", "host": ["{{baseUrl}}"], "path": ["knowledge", ":knowledge_id"], "variable": [{ "key": "knowledge_id", "value": "" }] },
+            "description": "Updates an existing knowledge entry."
+          }
+        },
+        {
+          "name": "Delete knowledge entry",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/knowledge/:knowledge_id", "host": ["{{baseUrl}}"], "path": ["knowledge", ":knowledge_id"], "variable": [{ "key": "knowledge_id", "value": "" }] },
+            "description": "Deletes a knowledge entry."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Playbooks",
+      "item": [
+        {
+          "name": "List playbooks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/playbooks", "host": ["{{baseUrl}}"], "path": ["playbooks"] },
+            "description": "Retrieves all team playbooks for the organization."
+          }
+        },
+        {
+          "name": "Create playbook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Triage a bug report\",\n  \"body\": \"1. Reproduce the issue.\\n2. Write a failing test.\\n3. Fix and open a PR.\"\n}" },
+            "url": { "raw": "{{baseUrl}}/playbooks", "host": ["{{baseUrl}}"], "path": ["playbooks"] },
+            "description": "Creates a new playbook."
+          }
+        },
+        {
+          "name": "Get playbook",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/playbooks/:playbook_id", "host": ["{{baseUrl}}"], "path": ["playbooks", ":playbook_id"], "variable": [{ "key": "playbook_id", "value": "" }] },
+            "description": "Retrieves a playbook by ID."
+          }
+        },
+        {
+          "name": "Update playbook",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/playbooks/:playbook_id", "host": ["{{baseUrl}}"], "path": ["playbooks", ":playbook_id"], "variable": [{ "key": "playbook_id", "value": "" }] },
+            "description": "Updates an existing playbook."
+          }
+        },
+        {
+          "name": "Delete playbook",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/playbooks/:playbook_id", "host": ["{{baseUrl}}"], "path": ["playbooks", ":playbook_id"], "variable": [{ "key": "playbook_id", "value": "" }] },
+            "description": "Deletes a playbook."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Secrets",
+      "item": [
+        {
+          "name": "List secrets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/secrets", "host": ["{{baseUrl}}"], "path": ["secrets"] },
+            "description": "Lists all secrets for the organization. Returns metadata only, not values."
+          }
+        },
+        {
+          "name": "Create secret",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"type\": \"key-value\",\n  \"key\": \"STAGING_API_KEY\",\n  \"value\": \"changeme\",\n  \"sensitive\": true,\n  \"note\": \"Staging environment API key\"\n}" },
+            "url": { "raw": "{{baseUrl}}/secrets", "host": ["{{baseUrl}}"], "path": ["secrets"] },
+            "description": "Creates a new organization secret."
+          }
+        },
+        {
+          "name": "Delete a secret",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/secrets/:secret_id", "host": ["{{baseUrl}}"], "path": ["secrets", ":secret_id"], "variable": [{ "key": "secret_id", "value": "" }] },
+            "description": "Deletes a secret."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Organizations (v3)",
+      "item": [
+        {
+          "name": "Create a session (v3, organization-scoped)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"prompt\": \"Open a PR that upgrades the lodash dependency\"\n}" },
+            "url": { "raw": "https://api.devin.ai/v3/organizations/:org_id/sessions", "host": ["https://api.devin.ai"], "path": ["v3", "organizations", ":org_id", "sessions"], "variable": [{ "key": "org_id", "value": "" }] },
+            "description": "v3 equivalent of session create, scoped to an organization, using a cog_ service-user or personal access token."
+          }
+        },
+        {
+          "name": "List organization users (v3)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "https://api.devin.ai/v3/organizations/members/users", "host": ["https://api.devin.ai"], "path": ["v3", "organizations", "members", "users"] },
+            "description": "Lists users in the organization for use with create_as_user_id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Enterprise (v3)",
+      "item": [
+        {
+          "name": "List enterprise organizations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "https://api.devin.ai/v3/enterprise/organizations", "host": ["https://api.devin.ai"], "path": ["v3", "enterprise", "organizations"] },
+            "description": "Lists every organization under the enterprise account."
+          }
+        },
+        {
+          "name": "List enterprise audit logs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "https://api.devin.ai/v3/enterprise/audit-logs", "host": ["https://api.devin.ai"], "path": ["v3", "enterprise", "audit-logs"] },
+            "description": "Paginated audit log entries with time-based filtering."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Consumption",
+      "item": [
+        {
+          "name": "Get daily ACU consumption for the enterprise",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "https://api.devin.ai/v3/enterprise/consumption/daily", "host": ["https://api.devin.ai"], "path": ["v3", "enterprise", "consumption", "daily"] },
+            "description": "Daily ACU consumption totals across the entire enterprise."
+          }
+        },
+        {
+          "name": "Get per-session daily ACU consumption",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "https://api.devin.ai/v3/organizations/:org_id/consumption/sessions", "host": ["https://api.devin.ai"], "path": ["v3", "organizations", ":org_id", "consumption", "sessions"], "variable": [{ "key": "org_id", "value": "" }] },
+            "description": "Per-session daily ACU consumption for an organization."
+          }
+        }
+      ]
+    }
+  ]
+}

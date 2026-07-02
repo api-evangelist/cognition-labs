@@ -1,0 +1,233 @@
+aid: cognition-labs
+url: https://raw.githubusercontent.com/api-evangelist/cognition-labs/refs/heads/main/apis.yml
+name: Cognition Labs
+kind: company
+description: Cognition Labs is the applied AI lab behind Devin, the autonomous AI
+  software engineer that plans, writes, tests, and ships code inside its own shell,
+  code editor, and browser. The Devin API lets teams create and drive Devin sessions
+  programmatically - sending prompts and follow-up messages, attaching files, storing
+  organizational knowledge and reusable playbooks, injecting secrets, and tracking
+  Agent Compute Unit (ACU) consumption - across a legacy v1 surface, a v2 enterprise
+  surface, and a current v3 organizations/enterprise surface built around service-user
+  and personal access tokens.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- AI Agent
+- Autonomous Coding
+- Software Engineering
+- LLM
+- Devin
+created: '2026-07-02'
+modified: '2026-07-02'
+specificationVersion: '0.19'
+apis:
+- aid: cognition-labs:devin-sessions-api
+  name: Devin Sessions API
+  tags:
+  - Sessions
+  - Agent
+  - Tasks
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session
+  baseURL: https://api.devin.ai/v1
+  properties:
+  - url: https://docs.devin.ai/api-reference/overview
+    type: Documentation
+  - url: https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  - url: collections/cognition-labs.postman_collection.json
+    type: Postman
+  - url: collections/cognition-labs.opencollection.json
+    type: OpenCollection
+  description: Create a Devin session with a natural-language prompt and optional
+    playbook, snapshot, knowledge, secrets, tags, and a max ACU cap; list sessions
+    with filters; retrieve full session status and structured output; update tags;
+    and terminate a running session.
+- aid: cognition-labs:devin-messages-api
+  name: Devin Messages API
+  tags:
+  - Messages
+  - Sessions
+  - Conversational
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+  baseURL: https://api.devin.ai/v1
+  properties:
+  - url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Send follow-up messages into a running Devin session to steer, correct,
+    or add context to its work, and list the message history of a session. The
+    session must be in a running state to receive a message; sending a message
+    also wakes a sleeping session.
+- aid: cognition-labs:devin-attachments-api
+  name: Devin Attachments API
+  tags:
+  - Attachments
+  - Files
+  - Uploads
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v1/attachments/upload-files-for-devin-to-work-with
+  baseURL: https://api.devin.ai/v1
+  properties:
+  - url: https://docs.devin.ai/api-reference/v1/attachments/upload-files-for-devin-to-work-with
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/attachments/download-attachment-files
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Upload files (multipart/form-data) for Devin to work with, receiving
+    back a file URL that is referenced in a session prompt as ATTACHMENT:"{file_url}",
+    and download attachment files by ID.
+- aid: cognition-labs:devin-knowledge-api
+  name: Devin Knowledge API
+  tags:
+  - Knowledge
+  - Context
+  - Organization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v1/knowledge/list-knowledge
+  baseURL: https://api.devin.ai/v1
+  properties:
+  - url: https://docs.devin.ai/api-reference/v1/knowledge/list-knowledge
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/knowledge/create-knowledge
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Create, list, update, and delete organization-level knowledge entries
+    and folders - persistent notes with a trigger description that Devin
+    automatically pulls into relevant sessions - plus enterprise-level knowledge
+    notes on the v3 surface.
+- aid: cognition-labs:devin-playbooks-api
+  name: Devin Playbooks API
+  tags:
+  - Playbooks
+  - Workflows
+  - Automation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v1/playbooks/list-playbooks
+  baseURL: https://api.devin.ai/v1
+  properties:
+  - url: https://docs.devin.ai/api-reference/v1/playbooks/list-playbooks
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/playbooks/create-playbook
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Create, retrieve, list, update, and delete team playbooks - reusable,
+    named instruction sets that seed new Devin sessions via a playbook_id so
+    recurring tasks run the same way every time.
+- aid: cognition-labs:devin-secrets-api
+  name: Devin Secrets API
+  tags:
+  - Secrets
+  - Credentials
+  - Security
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v1/secrets/list-secrets
+  baseURL: https://api.devin.ai/v1
+  properties:
+  - url: https://docs.devin.ai/api-reference/v1/secrets/list-secrets
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/secrets/create-secret
+    type: APIReference
+  - url: https://docs.devin.ai/admin/security
+    type: Documentation
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Create, list, and delete organization secrets (cookie, key-value,
+    dictionary, or TOTP types) that Devin can use inside sessions without exposing
+    values back over the API; list responses return metadata only. Org-level
+    secrets are also managed on the v3 surface.
+- aid: cognition-labs:devin-organizations-api
+  name: Devin Organizations API
+  tags:
+  - Organizations
+  - Users
+  - RBAC
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/v3/overview
+  baseURL: https://api.devin.ai/v3
+  properties:
+  - url: https://docs.devin.ai/api-reference/v3/overview
+    type: Documentation
+  - url: https://docs.devin.ai/api-reference/getting-started/teams-quickstart
+    type: Documentation
+  - url: https://docs.devin.ai/api-reference/v3/users/members-users
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Current (v3) organization-scoped surface at /v3/organizations/{org_id} -
+    create and manage sessions with optional user attribution, list/invite/delete
+    organization users, and reach the same knowledge, playbooks, and secrets
+    resources under RBAC with service-user (cog_) or personal access tokens.
+- aid: cognition-labs:devin-enterprise-api
+  name: Devin Enterprise API
+  tags:
+  - Enterprise
+  - Admin
+  - Audit Logs
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart
+  baseURL: https://api.devin.ai/v3
+  properties:
+  - url: https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart
+    type: Documentation
+  - url: https://docs.devin.ai/api-reference/v2/organizations/list-organizations
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v2/api-keys/list-enterprise-api-keys
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Cross-organization administration at /v3/enterprise and the v2
+    enterprise surface - create, list, update, and delete organizations and
+    their members, provision and revoke service API keys, list/inspect sessions
+    and their insights across every organization, and retrieve paginated audit
+    logs.
+- aid: cognition-labs:devin-usage-consumption-api
+  name: Devin Usage & Consumption API
+  tags:
+  - Usage
+  - ACU
+  - Billing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.devin.ai/admin/billing/usage
+  baseURL: https://api.devin.ai/v3
+  properties:
+  - url: https://docs.devin.ai/admin/billing/usage
+    type: Documentation
+  - url: https://docs.devin.ai/admin/billing/enterprise
+    type: Documentation
+  - url: https://docs.devin.ai/api-reference/v3/consumption/consumption-daily
+    type: APIReference
+  - url: openapi/cognition-labs-openapi.yml
+    type: OpenAPI
+  description: Read enterprise- and session-level Agent Compute Unit (ACU)
+    consumption - daily totals across an enterprise, per-organization and
+    per-user daily consumption, and per-session usage/insights metrics -
+    for chargeback, budgeting, and enforcing per-organization consumption caps.
+common:
+- type: GitHubOrganization
+  url: https://github.com/CognitionAI
+- type: LinkedIn
+  url: https://www.linkedin.com/company/cognition-ai-labs
+- type: Website
+  url: https://cognition.ai/
+- type: Documentation
+  url: https://docs.devin.ai
+- type: Plans
+  url: plans/cognition-labs-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/cognition-labs-rate-limits.yml
+- type: FinOps
+  url: finops/cognition-labs-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

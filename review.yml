@@ -1,0 +1,187 @@
+aid: cognition-labs
+name: Cognition Labs
+review:
+  question: Does Cognition Labs expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-02'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. The Devin API (v1, v2, and v3) is
+    entirely request/response REST over HTTPS at api.devin.ai. Cognition's
+    own marketing copy for the Devin Desktop client mentions the client
+    acting as "a high-performance bridge via gRPC/WebSockets protocol" to
+    stream the agent's terminal, code editor, and browser in real time, but
+    that transport is internal to Cognition's proprietary Desktop app - it
+    has no published schema, endpoint, or connection contract in the public
+    API reference at docs.devin.ai, so there is no server-push surface here
+    to model in AsyncAPI. Session progress is instead observed by polling
+    GET /sessions/{session_id} for status_enum.
+findings:
+  summary: |
+    Cognition Labs (makers of Devin) does not publish a documented public
+    WebSocket API. The Devin API spans three generations, all REST over
+    HTTPS at api.devin.ai: a legacy v1 API (apk_user_*/apk_* keys) covering
+    sessions, messages, attachments, knowledge, playbooks, and secrets; a v2
+    enterprise layer for organizations, members, API keys, and consumption;
+    and the current v3 API (cog_ service-user or personal access tokens)
+    re-platforming the same resources under /v3/organizations/{org_id} and
+    /v3/enterprise with RBAC and pagination. Session status is observed by
+    polling GET /sessions/{session_id} (status_enum: working, blocked,
+    expired, finished, suspend_requested, resume_requested, resumed, etc.) -
+    there is no documented SSE or WebSocket push channel for session events
+    on the public API. Cognition's Devin Desktop marketing page separately
+    references an internal gRPC/WebSockets bridge used by its own proprietary
+    client to stream the agent's terminal/editor/browser view, but this is
+    not part of the public API reference, has no published schema, and is
+    not something a third-party developer can connect to.
+  documentedButGated: |
+    Every endpoint modeled in this repo is transcribed directly from
+    Cognition's own public documentation at docs.devin.ai. However, actually
+    calling almost any of it requires a paid Devin subscription (Pro, Max,
+    or Teams) or an Enterprise contract to obtain a service-user API key
+    (cog_) or legacy key (apk_/apk_user_) - there is no free/anonymous
+    developer sandbox or public demo credential. The Free plan's console
+    access does not appear to include API key issuance in the documentation
+    reviewed. Nothing in this repo was exercised against live production
+    credentials; endpointsConfirmed below means "confirmed present and
+    specified in Cognition's public documentation," not "tested with a real
+    account."
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.devin.ai/v1
+      documented: true
+      note: Legacy but still-live v1 surface - sessions, messages, attachments, knowledge, playbooks, secrets.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.devin.ai/v3
+      documented: true
+      note: Current organizations/enterprise surface with RBAC, pagination, and cog_ tokens.
+    - protocol: Polling
+      scheme: https
+      documented: true
+      note: Session status/progress is observed via repeated GET /sessions/{session_id} calls, not a push channel.
+    - protocol: gRPC/WebSocket
+      scheme: wss
+      documented: false
+      note: Referenced only in Devin Desktop marketing copy as an internal transport for Cognition's own proprietary client UI; no public schema, endpoint, or API-reference entry exists.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in the public Devin API reference (v1, v2, or v3) as of the review date.
+  endpointsConfirmed:
+    - POST https://api.devin.ai/v1/sessions
+    - GET  https://api.devin.ai/v1/sessions
+    - GET  https://api.devin.ai/v1/sessions/{session_id}
+    - PUT  https://api.devin.ai/v1/sessions/{session_id}/tags
+    - DELETE https://api.devin.ai/v1/sessions/{session_id}
+    - POST https://api.devin.ai/v1/sessions/{session_id}/message
+    - POST https://api.devin.ai/v1/attachments
+    - GET  https://api.devin.ai/v1/attachments/{attachment_id}
+    - GET  https://api.devin.ai/v1/knowledge
+    - POST https://api.devin.ai/v1/knowledge
+    - PUT  https://api.devin.ai/v1/knowledge/{knowledge_id}
+    - DELETE https://api.devin.ai/v1/knowledge/{knowledge_id}
+    - GET  https://api.devin.ai/v1/playbooks
+    - POST https://api.devin.ai/v1/playbooks
+    - GET  https://api.devin.ai/v1/playbooks/{playbook_id}
+    - PUT  https://api.devin.ai/v1/playbooks/{playbook_id}
+    - DELETE https://api.devin.ai/v1/playbooks/{playbook_id}
+    - GET  https://api.devin.ai/v1/secrets
+    - POST https://api.devin.ai/v1/secrets
+    - DELETE https://api.devin.ai/v1/secrets/{secret_id}
+    - POST https://api.devin.ai/v3/organizations/{org_id}/sessions
+    - GET  https://api.devin.ai/v3/organizations/members/users
+    - GET  https://api.devin.ai/v3/enterprise/organizations
+    - GET  https://api.devin.ai/v3/enterprise/audit-logs
+    - GET  https://api.devin.ai/v3/enterprise/consumption/daily
+  endpointsModeled:
+    - GET https://api.devin.ai/v3/organizations/{org_id}/consumption/sessions
+  endpointsModeledNote: |
+    The per-session daily consumption path is documented conceptually
+    (docs.devin.ai/api-reference/v3/consumption/consumption-daily-sessions)
+    but the exact path shape shown to the crawler did not resolve a fully
+    literal path template; it is modeled here as
+    /v3/organizations/{org_id}/consumption/sessions on the pattern of the
+    other v3 organization-scoped endpoints and should be re-verified against
+    the live reference page before being treated as authoritative. The v2/v3
+    enterprise surface also has additional organization, member, and
+    API-key management endpoints (create/update/delete organization,
+    invite/delete members, provision/revoke service API keys) that are
+    documented but not individually modeled in the OpenAPI file - see the
+    APIReference links in apis.yml and docs.devin.ai/llms.txt for the
+    complete list.
+sources:
+  - url: https://docs.devin.ai/api-reference/overview
+    type: Documentation
+    note: v3 base URL https://api.devin.ai/v3/organizations/* and /v3/enterprise/*; cog_ service-user tokens; all REST.
+  - url: https://docs.devin.ai/api-reference/authentication
+    type: Documentation
+    note: Principals vs tokens, apk_/apk_user_ legacy keys vs cog_ v3 keys, org ID location.
+  - url: https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session
+    type: APIReference
+    note: POST /v1/sessions request/response fields.
+  - url: https://docs.devin.ai/api-reference/v1/sessions/list-sessions
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/sessions/retrieve-details-about-an-existing-session
+    type: APIReference
+    note: status_enum values confirm polling-based status, not push.
+  - url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/sessions/update-session-tags
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/sessions/terminate-a-session
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/attachments/upload-files-for-devin-to-work-with
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/attachments/download-attachment-files
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/knowledge/list-knowledge
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/knowledge/create-knowledge
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/playbooks/list-playbooks
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/secrets/list-secrets
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/v1/secrets/create-secret
+    type: APIReference
+  - url: https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart
+    type: Documentation
+    note: v3 enterprise/organizations scopes, service-user provisioning, audit logs, consumption examples.
+  - url: https://docs.devin.ai/api-reference/v3/usage-examples
+    type: Documentation
+    note: Confirms sessions, messages, knowledge, enterprise organizations/audit-logs/consumption examples all as plain REST cURL calls.
+  - url: https://docs.devin.ai/admin/billing/usage
+    type: Documentation
+    note: ACU metering model, sleep-on-inactivity, no concurrent session limits.
+  - url: https://docs.devin.ai/admin/billing/self-serve
+    type: Documentation
+    note: Free/Pro/Max/Teams plan structure and quotas.
+  - url: https://docs.devin.ai/admin/billing/enterprise
+    type: Documentation
+    note: Enterprise ACU billing and per-organization consumption caps.
+  - url: https://docs.devin.ai/admin/common-issues
+    type: Documentation
+    note: No rate-limit or throttling behavior documented.
+  - url: https://devin.ai/desktop/
+    type: Documentation
+    note: Source of the internal gRPC/WebSockets bridge claim for the proprietary Desktop client; confirmed to have no public API reference entry.
+  - url: https://github.com/CognitionAI
+    type: SourceCode
+    note: Public GitHub org - devin-cli, devin-extension, devin-swebench-results, deepwiki, blockdiff, qa-devin, metabase-mcp-server.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on Cognition's public Devin API.
+    All three documented API generations (v1, v2, v3) are REST over HTTPS,
+    and session progress is observed via polling rather than any push
+    transport. No AsyncAPI document was created because there is no
+    documented server-push surface on the public API to model; the
+    gRPC/WebSockets bridge mentioned for the Devin Desktop client is
+    internal, undocumented, and unrelated to the public API reference.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

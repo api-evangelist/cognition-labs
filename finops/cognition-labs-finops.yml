@@ -1,0 +1,105 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Cognition Labs
+providerId: cognition-labs
+created: '2026-07-02'
+modified: '2026-07-02'
+reconciled: false
+tags:
+- AI
+- AI Agent
+- Devin
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Devin spend. Cognition meters all Devin usage - whether
+  driven through the web app, IDE/CLI/Desktop clients, or the API - in Agent
+  Compute Units (ACUs). ACUs accrue for the work Devin actually performs in a
+  session (planning, context gathering, task execution, browser actions, code
+  execution, VM time, and networking), not for time spent waiting on a human
+  response, running test suites, or cloning a repository; Windows sessions run
+  roughly 9% higher than equivalent Linux sessions, and idle sessions sleep
+  (and stop accruing ACUs) after about 0.1 ACU of inactivity. Self-serve
+  customers draw against a plan quota plus optional on-demand credits;
+  Enterprise customers are billed directly in ACUs at a rate set in their
+  order form and can cap consumption per organization.
+notes: >-
+  Cognition does not publish a flat USD-per-ACU rate; self-serve plan quotas
+  and on-demand credit pricing are on the pricing page, and Enterprise ACU
+  rates are negotiated per contract. Verify current numbers directly rather
+  than assuming a fixed conversion.
+sources:
+- https://cognition.ai/pricing
+- https://docs.devin.ai/admin/billing
+- https://docs.devin.ai/admin/billing/usage
+- https://docs.devin.ai/admin/billing/enterprise
+- https://docs.devin.ai/admin/billing/self-serve
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Cognition
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Devin
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Cognition
+  PublisherName: Cognition
+  InvoiceIssuerName: Cognition
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: acu_consumption
+  description: Agent Compute Units consumed by session work - planning, context gathering, task execution, browser actions, code execution, VM time, and networking.
+  unit: acu
+  aggregation: sum
+  dimensions:
+  - organization
+  - session
+  - user
+- name: on_demand_credits
+  description: Prepaid on-demand credits purchased by self-serve Pro/Max/Teams customers to fund usage beyond plan quota; roll over monthly, never expire once purchased.
+  unit: acu
+  aggregation: sum
+  dimensions:
+  - account
+- name: enterprise_acu_spend
+  description: Enterprise ACU consumption billed at the contracted order-form rate.
+  unit: acu
+  aggregation: sum
+  dimensions:
+  - enterprise
+  - organization
+- name: seat_subscription
+  description: Flat monthly seat fees for Pro, Max, and Teams full seats.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+principles:
+- name: Visibility
+  description: Track ACU consumption per organization, session, and user via the v2/v3 consumption endpoints (daily consumption, session metrics, user daily consumption) to see where spend concentrates.
+- name: Allocation
+  description: Attribute sessions to individual users via create_as_user_id (v3) or requesting_user_email, and tag sessions, so ACU spend maps to teams and initiatives.
+- name: Optimization
+  description: Scope max_acu_limit on session creation to bound runaway tasks; rely on automatic sleep-on-inactivity; split large efforts across parallel sessions rather than one long-running session with idle gaps.
+- name: Accountability
+  description: Enterprise admins set per-organization ACU consumption caps so a single team cannot exceed its allocated budget; self-serve teams monitor shared on-demand credit burn across full and flex seats.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

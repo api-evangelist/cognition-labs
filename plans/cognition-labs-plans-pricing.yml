@@ -1,0 +1,209 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Cognition Labs
+providerId: cognition-labs
+created: '2026-07-02'
+modified: '2026-07-02'
+reconciled: false
+tags:
+- AI
+- AI Agent
+- Devin
+- Plans
+description: >-
+  Devin is priced two ways. Self-serve individuals and small teams subscribe
+  to Free, Pro, Max, or Teams, each carrying a quota of usage (metered in
+  Agent Compute Units, ACUs) plus optional on-demand credits that roll over
+  and never expire once purchased. Enterprise customers sign an order form and
+  are billed directly in ACUs at a negotiated rate, with admin-configurable
+  per-organization consumption caps. The Devin API itself (sessions, messages,
+  knowledge, playbooks, secrets, consumption) carries no separate API fee -
+  calling it draws down the same ACU-metered quota or Enterprise contract as
+  using Devin through the web app or IDE/CLI clients.
+notes: >-
+  Exact ACU-to-dollar conversion, the free tier's monthly allowance, and
+  current on-demand credit pricing are not published as flat numbers on the
+  pricing page and are not reconciled here; verify current rates at
+  cognition.ai/pricing and docs.devin.ai/admin/billing before quoting a
+  customer.
+sources:
+- https://cognition.ai/pricing
+- https://docs.devin.ai/admin/billing
+- https://docs.devin.ai/admin/billing/self-serve
+- https://docs.devin.ai/admin/billing/enterprise
+- https://docs.devin.ai/admin/billing/usage
+plans:
+- id: devin-free
+  name: Free
+  type: free
+  description: >-
+    Single-seat evaluation tier with limited usage plus access to Devin
+    Review and DeepWiki.
+  entries:
+  - label: Included Usage
+    name: free_quota
+    type: usage
+    metric: acu
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Devin Review
+  - name: DeepWiki
+  - name: 1 Member
+- id: devin-pro
+  name: Pro
+  type: paid
+  description: >-
+    $20/month single-seat plan with a daily and weekly usage allowance, plus
+    on-demand credits and integrations.
+  entries:
+  - label: Subscription
+    name: pro_subscription
+    type: flat
+    metric: seat
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $20/month
+    userMultiplied: false
+  - label: Daily + Weekly Quota
+    name: pro_quota
+    type: usage
+    metric: acu
+    limit: -1
+    timeFrame: day
+    geo: global
+    unit: 1
+    price: included, capped daily and weekly
+    userMultiplied: false
+  elements:
+  - name: Daily and Weekly Allowance
+  - name: On-Demand Credits
+  - name: Integrations
+- id: devin-max
+  name: Max
+  type: paid
+  description: >-
+    $200/month single-seat plan with a larger weekly-only allowance (no daily
+    cap) for heavier individual usage.
+  entries:
+  - label: Subscription
+    name: max_subscription
+    type: flat
+    metric: seat
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $200/month
+    userMultiplied: false
+  - label: Weekly Quota
+    name: max_quota
+    type: usage
+    metric: acu
+    limit: -1
+    timeFrame: week
+    geo: global
+    unit: 1
+    price: included, capped weekly only
+    userMultiplied: false
+  elements:
+  - name: Weekly-Only Allowance
+  - name: On-Demand Credits
+  - name: Integrations
+- id: devin-teams
+  name: Teams
+  type: paid
+  description: >-
+    Multi-seat plan with a $80/month floor. Full seats are $40/month each
+    (Pro-equivalent quota plus Desktop access); flex seats are free and draw
+    from a shared pool of on-demand credits. Any amount below the $80 floor
+    converts to prepaid shared credits.
+  entries:
+  - label: Full Seat
+    name: teams_full_seat
+    type: flat
+    metric: seat
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $40/month per full seat
+    userMultiplied: true
+  - label: Flex Seat
+    name: teams_flex_seat
+    type: flat
+    metric: seat
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0 (draws from shared on-demand credits)
+    userMultiplied: true
+  - label: Plan Minimum
+    name: teams_minimum
+    type: flat
+    metric: account
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $80/month minimum
+    userMultiplied: false
+  elements:
+  - name: Unlimited Members
+  - name: Shared On-Demand Credit Pool
+  - name: Desktop Access (Full Seats)
+- id: devin-on-demand-credits
+  name: On-Demand Credits
+  type: usage
+  description: >-
+    Prepaid credits that fund usage beyond a plan's included quota. Credits
+    roll over month-to-month; purchased credits never expire.
+  entries:
+  - label: Credit Purchase
+    name: on_demand_credits
+    type: usage
+    metric: acu
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: purchased in blocks; see pricing page for current rate
+    userMultiplied: false
+  elements:
+  - name: Roll Over Monthly
+  - name: Never Expire (once purchased)
+- id: devin-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom order-form contract billed in Agent Compute Units (ACUs) at a
+    negotiated rate, with admin-configurable per-organization ACU consumption
+    caps, SSO, RBAC, audit logs, and dedicated support. Contact sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise_acu_rate
+    type: usage
+    metric: acu
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: negotiated ACU rate per order form; contact sales
+    userMultiplied: false
+  elements:
+  - name: Negotiated ACU Rate
+  - name: Per-Organization Consumption Caps
+  - name: SSO and RBAC
+  - name: Audit Logs
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

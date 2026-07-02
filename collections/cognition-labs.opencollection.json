@@ -1,0 +1,324 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs)",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create a new Devin session.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/sessions",
+            "body": { "type": "json", "data": "{\n  \"prompt\": \"Fix the failing tests in the payments module\"\n}" }
+          },
+          "docs": "Creates a new Devin session from a natural-language prompt."
+        },
+        {
+          "info": { "name": "List sessions.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/sessions?limit=100&offset=0"
+          },
+          "docs": "Lists sessions for the organization, with optional filters."
+        },
+        {
+          "info": { "name": "Retrieve session details.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/sessions/:session_id",
+            "params": [
+              { "name": "session_id", "value": "", "type": "path", "description": "The unique identifier of the session." }
+            ]
+          },
+          "docs": "Retrieves full status, message history, and structured output for a session."
+        },
+        {
+          "info": { "name": "Update session tags.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/sessions/:session_id/tags",
+            "params": [
+              { "name": "session_id", "value": "", "type": "path", "description": "The unique identifier of the session." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"tags\": [\"payments\", \"bugfix\"]\n}" }
+          },
+          "docs": "Replaces the tag list on a session (maximum 50 tags)."
+        },
+        {
+          "info": { "name": "Terminate a session.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/sessions/:session_id",
+            "params": [
+              { "name": "session_id", "value": "", "type": "path", "description": "The unique identifier of the session." }
+            ]
+          },
+          "docs": "Terminates a running session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Send a message to a session.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/sessions/:session_id/message",
+            "params": [
+              { "name": "session_id", "value": "", "type": "path", "description": "The unique identifier of the session." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"message\": \"Also add a changelog entry\"\n}" }
+          },
+          "docs": "Sends a follow-up message into a running session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Upload a file for Devin to work with.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/attachments",
+            "body": { "type": "form-data", "data": [{ "key": "file", "type": "file", "value": "" }] }
+          },
+          "docs": "Uploads a file and returns its URL for use as ATTACHMENT:\"{file_url}\" in a prompt."
+        },
+        {
+          "info": { "name": "Download an attachment file.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/attachments/:attachment_id",
+            "params": [
+              { "name": "attachment_id", "value": "", "type": "path", "description": "The ID of the attachment." }
+            ]
+          },
+          "docs": "Downloads an attachment file by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List all knowledge.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v1/knowledge" },
+          "docs": "Lists all knowledge entries and folders for the organization."
+        },
+        {
+          "info": { "name": "Create knowledge entry.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/knowledge",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Deploy process\",\n  \"body\": \"Always run migrations before deploying the API service.\",\n  \"trigger_description\": \"When a session touches deployment scripts.\"\n}" }
+          },
+          "docs": "Creates a new knowledge entry."
+        },
+        {
+          "info": { "name": "Update knowledge entry.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/knowledge/:knowledge_id",
+            "params": [
+              { "name": "knowledge_id", "value": "", "type": "path", "description": "The ID of the knowledge entry." }
+            ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing knowledge entry."
+        },
+        {
+          "info": { "name": "Delete knowledge entry.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/knowledge/:knowledge_id",
+            "params": [
+              { "name": "knowledge_id", "value": "", "type": "path", "description": "The ID of the knowledge entry." }
+            ]
+          },
+          "docs": "Deletes a knowledge entry."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Playbooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List playbooks.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v1/playbooks" },
+          "docs": "Retrieves all team playbooks for the organization."
+        },
+        {
+          "info": { "name": "Create playbook.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/playbooks",
+            "body": { "type": "json", "data": "{\n  \"title\": \"Triage a bug report\",\n  \"body\": \"1. Reproduce the issue.\\n2. Write a failing test.\\n3. Fix and open a PR.\"\n}" }
+          },
+          "docs": "Creates a new playbook."
+        },
+        {
+          "info": { "name": "Get playbook.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              { "name": "playbook_id", "value": "", "type": "path", "description": "The ID of the playbook." }
+            ]
+          },
+          "docs": "Retrieves a playbook by ID."
+        },
+        {
+          "info": { "name": "Update playbook.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              { "name": "playbook_id", "value": "", "type": "path", "description": "The ID of the playbook." }
+            ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing playbook."
+        },
+        {
+          "info": { "name": "Delete playbook.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              { "name": "playbook_id", "value": "", "type": "path", "description": "The ID of the playbook." }
+            ]
+          },
+          "docs": "Deletes a playbook."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Secrets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List secrets.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v1/secrets" },
+          "docs": "Lists all secrets for the organization. Returns metadata only, not values."
+        },
+        {
+          "info": { "name": "Create secret.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/secrets",
+            "body": { "type": "json", "data": "{\n  \"type\": \"key-value\",\n  \"key\": \"STAGING_API_KEY\",\n  \"value\": \"changeme\",\n  \"sensitive\": true,\n  \"note\": \"Staging environment API key\"\n}" }
+          },
+          "docs": "Creates a new organization secret."
+        },
+        {
+          "info": { "name": "Delete a secret.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/secrets/:secret_id",
+            "params": [
+              { "name": "secret_id", "value": "", "type": "path", "description": "The ID of the secret." }
+            ]
+          },
+          "docs": "Deletes a secret."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organizations (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create a session (v3, organization-scoped).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v3/organizations/:org_id/sessions",
+            "params": [
+              { "name": "org_id", "value": "", "type": "path", "description": "The organization ID." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"prompt\": \"Open a PR that upgrades the lodash dependency\"\n}" }
+          },
+          "docs": "v3 equivalent of session create, scoped to an organization, using a cog_ service-user or personal access token."
+        },
+        {
+          "info": { "name": "List organization users (v3).", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v3/organizations/members/users" },
+          "docs": "Lists users in the organization for use with create_as_user_id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Enterprise (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List enterprise organizations.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v3/enterprise/organizations" },
+          "docs": "Lists every organization under the enterprise account."
+        },
+        {
+          "info": { "name": "List enterprise audit logs.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v3/enterprise/audit-logs" },
+          "docs": "Paginated audit log entries with time-based filtering."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Consumption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Get daily ACU consumption for the enterprise.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.devin.ai/v3/enterprise/consumption/daily" },
+          "docs": "Daily ACU consumption totals across the entire enterprise."
+        },
+        {
+          "info": { "name": "Get per-session daily ACU consumption.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v3/organizations/:org_id/consumption/sessions",
+            "params": [
+              { "name": "org_id", "value": "", "type": "path", "description": "The organization ID." }
+            ]
+          },
+          "docs": "Per-session daily ACU consumption for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
