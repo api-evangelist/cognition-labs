@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/cognition-labs-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current
+    v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization:
+    Bearer YOUR_API_KEY`.'
+  sources:
+  - openapi/cognition-labs-openapi.yml

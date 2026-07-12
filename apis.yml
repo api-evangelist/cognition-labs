@@ -214,6 +214,14 @@ apis:
     per-user daily consumption, and per-session usage/insights metrics -
     for chargeback, budgeting, and enforcing per-organization consumption caps.
 common:
+- type: TrustCenter
+  url: security/cognition-labs-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/cognition-labs-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/cognition-labs-domain-security.yml
+- type: Authentication
+  url: authentication/cognition-labs-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/CognitionAI
 - type: LinkedIn
@@ -228,6 +236,8 @@ common:
   url: rate-limits/cognition-labs-rate-limits.yml
 - type: FinOps
   url: finops/cognition-labs-finops.yml
+- url: https://cognition.com/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
