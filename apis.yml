@@ -214,6 +214,8 @@ apis:
     per-user daily consumption, and per-session usage/insights metrics -
     for chargeback, budgeting, and enforcing per-organization consumption caps.
 common:
+- type: AgenticAccess
+  url: agentic-access/cognition-labs-agentic-access.yml
 - type: TrustCenter
   url: security/cognition-labs-trust-center.yml
 - type: VulnerabilityDisclosure
