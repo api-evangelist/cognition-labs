@@ -1,0 +1,184 @@
+openapi: 3.0.3
+info:
+  title: Devin API (Cognition Labs) Attachments Playbooks API
+  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.
+  version: '1.0'
+  contact:
+    name: Cognition
+    url: https://cognition.ai
+  license:
+    name: Proprietary
+    url: https://docs.devin.ai/admin/security
+servers:
+- url: https://api.devin.ai/v1
+  description: Legacy v1 API (apk_user_*/apk_* keys)
+- url: https://api.devin.ai/v3
+  description: Current v3 organizations/enterprise API (cog_ keys)
+security:
+- bearerAuth: []
+tags:
+- name: Playbooks
+  description: Reusable team playbooks that seed new sessions.
+paths:
+  /playbooks:
+    get:
+      operationId: listPlaybooks
+      tags:
+      - Playbooks
+      summary: List all team playbooks
+      responses:
+        '200':
+          description: The organization's playbooks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Playbook'
+    post:
+      operationId: createPlaybook
+      tags:
+      - Playbooks
+      summary: Create a playbook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaybookInput'
+      responses:
+        '200':
+          description: The created playbook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /playbooks/{playbook_id}:
+    parameters:
+    - name: playbook_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getPlaybook
+      tags:
+      - Playbooks
+      summary: Get a playbook
+      responses:
+        '200':
+          description: The requested playbook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    put:
+      operationId: updatePlaybook
+      tags:
+      - Playbooks
+      summary: Update a playbook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaybookInput'
+      responses:
+        '200':
+          description: The updated playbook.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playbook'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    delete:
+      operationId: deletePlaybook
+      tags:
+      - Playbooks
+      summary: Delete a playbook
+      responses:
+        '200':
+          description: Deletion confirmation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  schemas:
+    Playbook:
+      allOf:
+      - $ref: '#/components/schemas/PlaybookInput'
+      - type: object
+        properties:
+          playbook_id:
+            type: string
+          status:
+            type: string
+          org_id:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+            nullable: true
+          updated_at:
+            type: string
+            format: date-time
+            nullable: true
+          created_by_user_id:
+            type: string
+            nullable: true
+          created_by_user_name:
+            type: string
+            nullable: true
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+    PlaybookInput:
+      type: object
+      required:
+      - title
+      - body
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        macro:
+          type: string
+        access_type:
+          type: string
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization: Bearer YOUR_API_KEY`.'

@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: Devin API (Cognition Labs) Attachments API
+  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.
+  version: '1.0'
+  contact:
+    name: Cognition
+    url: https://cognition.ai
+  license:
+    name: Proprietary
+    url: https://docs.devin.ai/admin/security
+servers:
+- url: https://api.devin.ai/v1
+  description: Legacy v1 API (apk_user_*/apk_* keys)
+- url: https://api.devin.ai/v3
+  description: Current v3 organizations/enterprise API (cog_ keys)
+security:
+- bearerAuth: []
+tags:
+- name: Attachments
+  description: Upload and download files for Devin to work with.
+paths:
+  /attachments:
+    post:
+      operationId: uploadAttachment
+      tags:
+      - Attachments
+      summary: Upload a file for Devin to work with
+      description: Uploads a file and returns its URL. Reference the returned URL in a session prompt as ATTACHMENT:"{file_url}" on its own line.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: The uploaded file's URL.
+          content:
+            application/json:
+              schema:
+                type: string
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /attachments/{attachment_id}:
+    parameters:
+    - name: attachment_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: downloadAttachment
+      tags:
+      - Attachments
+      summary: Download an attachment file
+      responses:
+        '200':
+          description: The raw attachment file contents.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  schemas:
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization: Bearer YOUR_API_KEY`.'

@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: Devin API (Cognition Labs) Attachments Organizations (v3) API
+  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.
+  version: '1.0'
+  contact:
+    name: Cognition
+    url: https://cognition.ai
+  license:
+    name: Proprietary
+    url: https://docs.devin.ai/admin/security
+servers:
+- url: https://api.devin.ai/v1
+  description: Legacy v1 API (apk_user_*/apk_* keys)
+- url: https://api.devin.ai/v3
+  description: Current v3 organizations/enterprise API (cog_ keys)
+security:
+- bearerAuth: []
+tags:
+- name: Organizations (v3)
+  description: Current org-scoped session and user management.
+paths:
+  /organizations/{org_id}/sessions:
+    parameters:
+    - $ref: '#/components/parameters/OrgId'
+    post:
+      operationId: createOrganizationSession
+      tags:
+      - Organizations (v3)
+      summary: Create a session (v3, organization-scoped)
+      description: v3 equivalent of POST /sessions, scoped to an organization and served from https://api.devin.ai/v3. Supports create_as_user_id to attribute the session to a specific organization member.
+      servers:
+      - url: https://api.devin.ai/v3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateSessionInput'
+              - type: object
+                properties:
+                  create_as_user_id:
+                    type: string
+                    description: Attribute the session to this organization user.
+      responses:
+        '200':
+          description: The created session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /organizations/members/users:
+    get:
+      operationId: listOrganizationUsers
+      tags:
+      - Organizations (v3)
+      summary: List organization users (v3)
+      description: Lists users in the organization, for use with create_as_user_id.
+      servers:
+      - url: https://api.devin.ai/v3
+      responses:
+        '200':
+          description: A list of organization users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        email:
+                          type: string
+                        full_name:
+                          type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    CreateSessionInput:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: The task prompt for Devin to work on.
+        title:
+          type: string
+          description: Custom session name; auto-generated if omitted.
+        snapshot_id:
+          type: string
+        playbook_id:
+          type: string
+        knowledge_ids:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: Null uses all knowledge; empty array uses none.
+        secret_ids:
+          type: array
+          items:
+            type: string
+          nullable: true
+          description: Null uses all secrets; empty array uses none.
+        session_secrets:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type: string
+              sensitive:
+                type: boolean
+        structured_output_schema:
+          type: object
+          description: JSON Schema (Draft 7) for validating structured output. Max 64KB.
+          additionalProperties: true
+        tags:
+          type: array
+          maxItems: 50
+          items:
+            type: string
+        max_acu_limit:
+          type: integer
+          description: Maximum ACU allowance for the session.
+        idempotent:
+          type: boolean
+          default: false
+        unlisted:
+          type: boolean
+          default: false
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+    CreateSessionResponse:
+      type: object
+      required:
+      - session_id
+      - url
+      properties:
+        session_id:
+          type: string
+        url:
+          type: string
+        is_new_session:
+          type: boolean
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
+  parameters:
+    OrgId:
+      name: org_id
+      in: path
+      required: true
+      description: The organization ID, found in Settings > Service Users.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization: Bearer YOUR_API_KEY`.'

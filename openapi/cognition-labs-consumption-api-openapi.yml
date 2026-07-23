@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Devin API (Cognition Labs) Attachments Consumption API
+  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.
+  version: '1.0'
+  contact:
+    name: Cognition
+    url: https://cognition.ai
+  license:
+    name: Proprietary
+    url: https://docs.devin.ai/admin/security
+servers:
+- url: https://api.devin.ai/v1
+  description: Legacy v1 API (apk_user_*/apk_* keys)
+- url: https://api.devin.ai/v3
+  description: Current v3 organizations/enterprise API (cog_ keys)
+security:
+- bearerAuth: []
+tags:
+- name: Consumption
+  description: Agent Compute Unit (ACU) usage and billing metrics.
+paths:
+  /enterprise/consumption/daily:
+    get:
+      operationId: getEnterpriseDailyConsumption
+      tags:
+      - Consumption
+      summary: Get daily ACU consumption for the enterprise
+      servers:
+      - url: https://api.devin.ai/v3
+      parameters:
+      - name: start_time
+        in: query
+        description: Unix timestamp (seconds) lower bound.
+        schema:
+          type: integer
+      - name: end_time
+        in: query
+        description: Unix timestamp (seconds) upper bound.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Daily ACU consumption totals.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  days:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          format: date
+                        acu_consumed:
+                          type: number
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /organizations/{org_id}/consumption/sessions:
+    parameters:
+    - $ref: '#/components/parameters/OrgId'
+    get:
+      operationId: getSessionDailyConsumption
+      tags:
+      - Consumption
+      summary: Get per-session daily ACU consumption
+      servers:
+      - url: https://api.devin.ai/v3
+      parameters:
+      - name: start_time
+        in: query
+        schema:
+          type: integer
+      - name: end_time
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Per-session daily ACU consumption.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        session_id:
+                          type: string
+                        date:
+                          type: string
+                          format: date
+                        acu_consumed:
+                          type: number
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    OrgId:
+      name: org_id
+      in: path
+      required: true
+      description: The organization ID, found in Settings > Service Users.
+      schema:
+        type: string
+  schemas:
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization: Bearer YOUR_API_KEY`.'
