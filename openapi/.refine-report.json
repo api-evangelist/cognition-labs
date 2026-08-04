@@ -1,0 +1,30 @@
+{
+  "provider": "cognition-labs",
+  "sources": [
+    "cognition-labs-attachments-api-openapi.yml",
+    "cognition-labs-consumption-api-openapi.yml",
+    "cognition-labs-enterprise-v3-api-openapi.yml",
+    "cognition-labs-knowledge-api-openapi.yml",
+    "cognition-labs-messages-api-openapi.yml",
+    "cognition-labs-organizations-v3-api-openapi.yml",
+    "cognition-labs-playbooks-api-openapi.yml",
+    "cognition-labs-secrets-api-openapi.yml",
+    "cognition-labs-sessions-api-openapi.yml"
+  ],
+  "outputs": [
+    "cognition-labs-attachments-api-openapi.yml",
+    "cognition-labs-consumption-api-openapi.yml",
+    "cognition-labs-enterprise-v3-api-openapi.yml",
+    "cognition-labs-knowledge-api-openapi.yml",
+    "cognition-labs-messages-api-openapi.yml",
+    "cognition-labs-organizations-v3-api-openapi.yml",
+    "cognition-labs-playbooks-api-openapi.yml",
+    "cognition-labs-secrets-api-openapi.yml",
+    "cognition-labs-sessions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
