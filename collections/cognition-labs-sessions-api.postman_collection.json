@@ -1,0 +1,872 @@
+{
+  "item": [
+    {
+      "id": "f2ccf4ba-35ab-4f5a-914a-9fe2f766bd29",
+      "name": "Sessions",
+      "description": {
+        "content": "Create and manage Devin sessions (v1 legacy surface).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3e1ef9f3-7a14-4bf2-bb05-403021e55cfa",
+          "name": "Create a new Devin session",
+          "request": {
+            "name": "Create a new Devin session",
+            "description": {
+              "content": "Creates a new Devin session from a natural-language prompt, optionally seeded with a playbook, snapshot, knowledge, secrets, tags, and a max ACU cap.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": false\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "39825709-1db8-4eda-b0ce-4e2eaf53161a",
+              "name": "The created (or, if idempotent and matched, existing) session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": 6502.73142091146,\n    \"key_1\": 8593,\n    \"key_2\": 4781\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"url\": \"string\",\n  \"is_new_session\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a04e04f7-a1e1-4ec7-99aa-85b9cb9d7ad5",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": 6502.73142091146,\n    \"key_1\": 8593,\n    \"key_2\": 4781\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a279048-3ca7-49ea-9a90-a0520b1f7a05",
+          "name": "List sessions",
+          "request": {
+            "name": "List sessions",
+            "description": {
+              "content": "Lists sessions for the organization, with optional filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter sessions by tag."
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "Filter sessions by tag."
+                },
+                {
+                  "disabled": false,
+                  "key": "user_email",
+                  "value": "<string>",
+                  "description": "Filter sessions by the creator's email address."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52f290c3-c57f-44cc-aeeb-2b71cacac5ea",
+              "name": "A page of sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessions\": [\n    {\n      \"session_id\": \"string\",\n      \"status\": \"string\",\n      \"created_at\": \"1965-02-16T12:38:09.244Z\",\n      \"updated_at\": \"1980-06-30T02:20:27.890Z\",\n      \"status_enum\": \"resume_requested_frontend\",\n      \"title\": \"string\",\n      \"requesting_user_email\": \"string\",\n      \"playbook_id\": \"string\",\n      \"snapshot_id\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pull_request\": {\n        \"url\": \"string\"\n      },\n      \"structured_output\": {\n        \"key_0\": 5900\n      }\n    },\n    {\n      \"session_id\": \"string\",\n      \"status\": \"string\",\n      \"created_at\": \"2018-08-24T14:24:40.251Z\",\n      \"updated_at\": \"1954-11-08T13:01:40.781Z\",\n      \"status_enum\": \"working\",\n      \"title\": \"string\",\n      \"requesting_user_email\": \"string\",\n      \"playbook_id\": \"string\",\n      \"snapshot_id\": \"string\",\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"pull_request\": {\n        \"url\": \"string\"\n      },\n      \"structured_output\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e342292d-b0d6-4d46-8034-112817a1c937",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "060c9201-7661-4ae2-a61a-9e11e4c8d762",
+          "name": "Retrieve session details",
+          "request": {
+            "name": "Retrieve session details",
+            "description": {
+              "content": "Retrieves full status, message history, and structured output for a session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) The unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9026c6d4-b843-4391-97c6-62fc40771c1b",
+              "name": "The requested session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"status\": \"string\",\n  \"created_at\": \"2019-11-16T16:44:05.348Z\",\n  \"updated_at\": \"1966-09-19T15:43:06.276Z\",\n  \"status_enum\": \"resume_requested\",\n  \"title\": \"string\",\n  \"requesting_user_email\": \"string\",\n  \"playbook_id\": \"string\",\n  \"snapshot_id\": \"string\",\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"pull_request\": {\n    \"url\": \"string\"\n  },\n  \"structured_output\": {\n    \"key_0\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "527ba61b-7341-4111-aa68-858fc0c9bb6e",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f596fd67-f53f-455e-b27f-8603db72c642",
+          "name": "Terminate a session",
+          "request": {
+            "name": "Terminate a session",
+            "description": {
+              "content": "Terminates a running session. The session must not already be in an exited state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) The unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "645f6d8d-0ef0-4b36-b17a-277be7650514",
+              "name": "Termination confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f66fd08-c3ac-48b6-93c2-a0d06ee74a6d",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b8f085b-fc65-4551-8169-2c8d54796bd4",
+          "name": "Update session tags",
+          "request": {
+            "name": "Update session tags",
+            "description": {
+              "content": "Replaces the tag list on a session (maximum 50 tags).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) The unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eedb032c-d128-434a-9c55-18d8dbb78878",
+              "name": "Confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47fe1e1d-2211-4c8c-88c3-a43e6d30696c",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f16ddd19-421e-40ef-a010-6abb48cc09be",
+    "name": "Devin API (Cognition Labs) Attachments Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.\n\nContact Support:\n Name: Cognition",
+      "type": "text/plain"
+    }
+  }
+}

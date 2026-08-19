@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments Messages API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a message to a session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/sessions/:session_id/message",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the session."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a follow-up message into a running session. The session must be in a running state to receive it; sending a message also wakes a sleeping session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

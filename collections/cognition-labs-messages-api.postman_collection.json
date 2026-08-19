@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "4a8b659d-bc16-46de-8afc-f829e2bc3da7",
+      "name": "Messages",
+      "description": {
+        "content": "Send and read messages within a running session.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c619233c-3402-40c7-911b-b130762fba0c",
+          "name": "Send a message to a session",
+          "request": {
+            "name": "Send a message to a session",
+            "description": {
+              "content": "Sends a follow-up message into a running session. The session must be in a running state to receive it; sending a message also wakes a sleeping session.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "session_id",
+                  "description": "(Required) The unique identifier of the session."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ace9fabd-8eac-4bcc-ae6b-50356b5d40d6",
+              "name": "Message accepted, or a detail note if the session was already suspended.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1842452b-c15f-4b2b-8428-c72fcb99c354",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "session_id",
+                      "description": "(Required) The unique identifier of the session."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a7b2e81b-68e9-44cc-9e29-38d9d6281cb2",
+    "name": "Devin API (Cognition Labs) Attachments Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.\n\nContact Support:\n Name: Cognition",
+      "type": "text/plain"
+    }
+  }
+}

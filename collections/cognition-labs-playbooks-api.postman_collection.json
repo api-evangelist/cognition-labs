@@ -1,0 +1,727 @@
+{
+  "item": [
+    {
+      "id": "3232d327-0d3b-448c-93c3-3760dc535641",
+      "name": "Playbooks",
+      "description": {
+        "content": "Reusable team playbooks that seed new sessions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2acdd4d-8eb7-4372-83e0-cd76d15af4c0",
+          "name": "List all team playbooks",
+          "request": {
+            "name": "List all team playbooks",
+            "description": {},
+            "url": {
+              "path": [
+                "playbooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7529aca-197f-4435-88d4-28509d9e48ee",
+              "name": "The organization's playbooks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"title\": \"string\",\n    \"body\": \"string\",\n    \"macro\": \"string\",\n    \"access_type\": \"string\",\n    \"playbook_id\": \"string\",\n    \"status\": \"string\",\n    \"org_id\": \"string\",\n    \"created_at\": \"2011-11-23T05:12:11.289Z\",\n    \"updated_at\": \"1949-12-27T01:40:22.265Z\",\n    \"created_by_user_id\": \"string\",\n    \"created_by_user_name\": \"string\"\n  },\n  {\n    \"title\": \"string\",\n    \"body\": \"string\",\n    \"macro\": \"string\",\n    \"access_type\": \"string\",\n    \"playbook_id\": \"string\",\n    \"status\": \"string\",\n    \"org_id\": \"string\",\n    \"created_at\": \"1976-08-19T14:05:43.449Z\",\n    \"updated_at\": \"2023-11-23T06:09:07.144Z\",\n    \"created_by_user_id\": \"string\",\n    \"created_by_user_name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2b2fc18-bf85-4ab8-94c5-1256847b9618",
+          "name": "Create a playbook",
+          "request": {
+            "name": "Create a playbook",
+            "description": {},
+            "url": {
+              "path": [
+                "playbooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "166be0ae-045d-4721-abc2-d5fee08f474c",
+              "name": "The created playbook.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\",\n  \"playbook_id\": \"string\",\n  \"status\": \"string\",\n  \"org_id\": \"string\",\n  \"created_at\": \"2002-04-09T19:20:57.062Z\",\n  \"updated_at\": \"2023-06-07T22:04:20.839Z\",\n  \"created_by_user_id\": \"string\",\n  \"created_by_user_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f745f427-da5e-4751-908a-f5b12fb42af2",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c4cf8e2-7d18-4c8d-883a-3c831076a21a",
+          "name": "Get a playbook",
+          "request": {
+            "name": "Get a playbook",
+            "description": {},
+            "url": {
+              "path": [
+                "playbooks",
+                ":playbook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playbook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23f32abe-be2b-48f5-9d30-7f37caf9b8ec",
+              "name": "The requested playbook.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks",
+                    ":playbook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playbook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\",\n  \"playbook_id\": \"string\",\n  \"status\": \"string\",\n  \"org_id\": \"string\",\n  \"created_at\": \"2002-04-09T19:20:57.062Z\",\n  \"updated_at\": \"2023-06-07T22:04:20.839Z\",\n  \"created_by_user_id\": \"string\",\n  \"created_by_user_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56803897-8728-47b3-bf95-b1a96ced9fdf",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks",
+                    ":playbook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playbook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86a10bcd-0e2b-4127-a218-3302ae27fe1a",
+          "name": "Update a playbook",
+          "request": {
+            "name": "Update a playbook",
+            "description": {},
+            "url": {
+              "path": [
+                "playbooks",
+                ":playbook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playbook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5e0ed3f-3c12-495a-b705-dddda04de512",
+              "name": "The updated playbook.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks",
+                    ":playbook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playbook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\",\n  \"playbook_id\": \"string\",\n  \"status\": \"string\",\n  \"org_id\": \"string\",\n  \"created_at\": \"2002-04-09T19:20:57.062Z\",\n  \"updated_at\": \"2023-06-07T22:04:20.839Z\",\n  \"created_by_user_id\": \"string\",\n  \"created_by_user_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aab07bf9-c2f9-4771-ad61-db3e5d7cd5f8",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks",
+                    ":playbook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playbook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"macro\": \"<string>\",\n  \"access_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd56220f-0449-43d8-9bc4-9b45b8c126c4",
+          "name": "Delete a playbook",
+          "request": {
+            "name": "Delete a playbook",
+            "description": {},
+            "url": {
+              "path": [
+                "playbooks",
+                ":playbook_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playbook_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0d76e80-940c-4f01-803e-8376c303c174",
+              "name": "Deletion confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks",
+                    ":playbook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playbook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bcfa0df-1020-4665-8916-c23459560503",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playbooks",
+                    ":playbook_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playbook_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5de51316-074b-454b-a62c-a7e3900aa3e2",
+    "name": "Devin API (Cognition Labs) Attachments Playbooks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.\n\nContact Support:\n Name: Cognition",
+      "type": "text/plain"
+    }
+  }
+}

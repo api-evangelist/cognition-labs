@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments Organizations (v3) API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a session (v3, organization-scoped)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/organizations/:org_id/sessions",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "The organization ID, found in Settings > Service Users."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "v3 equivalent of POST /sessions, scoped to an organization and served from https://api.devin.ai/v3. Supports create_as_user_id to attribute the session to a specific organization member."
+        },
+        {
+          "info": {
+            "name": "List organization users (v3)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/organizations/members/users"
+          },
+          "docs": "Lists users in the organization, for use with create_as_user_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

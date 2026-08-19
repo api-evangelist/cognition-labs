@@ -1,0 +1,437 @@
+{
+  "item": [
+    {
+      "id": "82395d1b-9953-4d84-8eef-3089d7ca877d",
+      "name": "Organizations (v3)",
+      "description": {
+        "content": "Current org-scoped session and user management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5d222ed1-f4d0-4267-b2ab-c2679eeaf123",
+          "name": "Create a session (v3, organization-scoped)",
+          "request": {
+            "name": "Create a session (v3, organization-scoped)",
+            "description": {
+              "content": "v3 equivalent of POST /sessions, scoped to an organization and served from https://api.devin.ai/v3. Supports create_as_user_id to attribute the session to a specific organization member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "organizations",
+                ":org_id",
+                "sessions"
+              ],
+              "host": [
+                "api",
+                "devin",
+                "ai"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) The organization ID, found in Settings > Service Users."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": 3225.6383826501087,\n    \"key_1\": false,\n    \"key_2\": 1079\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false,\n  \"create_as_user_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c5ea9914-48bd-4a93-aa30-9fcfab3c7565",
+              "name": "The created session.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    ":org_id",
+                    "sessions"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) The organization ID, found in Settings > Service Users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": true,\n    \"key_3\": \"string\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false,\n  \"create_as_user_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"string\",\n  \"url\": \"string\",\n  \"is_new_session\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21314025-b65d-4655-b9e4-51c71b759a63",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    ":org_id",
+                    "sessions"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) The organization ID, found in Settings > Service Users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": true,\n    \"key_3\": \"string\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false,\n  \"create_as_user_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8adbc5bd-ca22-4d1e-bbc2-dba0ce4cd1c8",
+              "name": "The request payload failed validation.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    ":org_id",
+                    "sessions"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) The organization ID, found in Settings > Service Users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"title\": \"<string>\",\n  \"snapshot_id\": \"<string>\",\n  \"playbook_id\": \"<string>\",\n  \"knowledge_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secret_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"session_secrets\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\",\n      \"sensitive\": \"<boolean>\"\n    }\n  ],\n  \"structured_output_schema\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": true,\n    \"key_3\": \"string\"\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"max_acu_limit\": \"<integer>\",\n  \"idempotent\": false,\n  \"unlisted\": false,\n  \"create_as_user_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e53cdc64-00dd-4a76-9c91-640012cfe537",
+          "name": "List organization users (v3)",
+          "request": {
+            "name": "List organization users (v3)",
+            "description": {
+              "content": "Lists users in the organization, for use with create_as_user_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "organizations",
+                "members",
+                "users"
+              ],
+              "host": [
+                "api",
+                "devin",
+                "ai"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd8f8f06-e9f1-467d-a55b-d78206d4f092",
+              "name": "A list of organization users.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    "members",
+                    "users"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"users\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"full_name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"full_name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "359d43df-6d50-4951-a240-da62a531eb38",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    "members",
+                    "users"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "10bdde8e-ff2a-4fe0-8d9d-1395db929973",
+    "name": "Devin API (Cognition Labs) Attachments Organizations (v3) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.\n\nContact Support:\n Name: Cognition",
+      "type": "text/plain"
+    }
+  }
+}

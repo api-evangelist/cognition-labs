@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments Playbooks API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Playbooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all team playbooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/playbooks"
+          },
+          "docs": "List all team playbooks"
+        },
+        {
+          "info": {
+            "name": "Create a playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/playbooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a playbook"
+        },
+        {
+          "info": {
+            "name": "Get a playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              {
+                "name": "playbook_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a playbook"
+        },
+        {
+          "info": {
+            "name": "Update a playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              {
+                "name": "playbook_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a playbook"
+        },
+        {
+          "info": {
+            "name": "Delete a playbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/playbooks/:playbook_id",
+            "params": [
+              {
+                "name": "playbook_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a playbook"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments Consumption API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Consumption",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get daily ACU consumption for the enterprise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/enterprise/consumption/daily",
+            "params": [
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp (seconds) lower bound."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp (seconds) upper bound."
+              }
+            ]
+          },
+          "docs": "Get daily ACU consumption for the enterprise"
+        },
+        {
+          "info": {
+            "name": "Get per-session daily ACU consumption",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/organizations/:org_id/consumption/sessions",
+            "params": [
+              {
+                "name": "org_id",
+                "value": "",
+                "type": "path",
+                "description": "The organization ID, found in Settings > Service Users."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get per-session daily ACU consumption"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

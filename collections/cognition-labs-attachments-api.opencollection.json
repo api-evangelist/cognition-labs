@@ -1,0 +1,63 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a file for Devin to work with",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/attachments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file and returns its URL. Reference the returned URL in a session prompt as ATTACHMENT:\"{file_url}\" on its own line."
+        },
+        {
+          "info": {
+            "name": "Download an attachment file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/attachments/:attachment_id",
+            "params": [
+              {
+                "name": "attachment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download an attachment file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments Enterprise (v3) API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Enterprise (v3)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List enterprise organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/enterprise/organizations"
+          },
+          "docs": "Lists every organization under the enterprise account."
+        },
+        {
+          "info": {
+            "name": "List enterprise audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/enterprise/audit-logs",
+            "params": [
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp (seconds) lower bound."
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp (seconds) upper bound."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Paginated audit log entries with time-based filtering."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

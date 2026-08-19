@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Devin API (Cognition Labs) Attachments Knowledge API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all knowledge entries and folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.devin.ai/v1/knowledge"
+          },
+          "docs": "List all knowledge entries and folders"
+        },
+        {
+          "info": {
+            "name": "Create a knowledge entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.devin.ai/v1/knowledge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a knowledge entry"
+        },
+        {
+          "info": {
+            "name": "Update a knowledge entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.devin.ai/v1/knowledge/:knowledge_id",
+            "params": [
+              {
+                "name": "knowledge_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a knowledge entry"
+        },
+        {
+          "info": {
+            "name": "Delete a knowledge entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.devin.ai/v1/knowledge/:knowledge_id",
+            "params": [
+              {
+                "name": "knowledge_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a knowledge entry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

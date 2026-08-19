@@ -1,0 +1,400 @@
+{
+  "item": [
+    {
+      "id": "1fa151bd-b787-48c4-af01-8b8eeb779797",
+      "name": "Consumption",
+      "description": {
+        "content": "Agent Compute Unit (ACU) usage and billing metrics.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2ef11180-e4df-4102-96ed-76c4a767e123",
+          "name": "Get daily ACU consumption for the enterprise",
+          "request": {
+            "name": "Get daily ACU consumption for the enterprise",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "enterprise",
+                "consumption",
+                "daily"
+              ],
+              "host": [
+                "api",
+                "devin",
+                "ai"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<integer>",
+                  "description": "Unix timestamp (seconds) lower bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<integer>",
+                  "description": "Unix timestamp (seconds) upper bound."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8213b182-c8ff-4115-9c8a-e7350d7a0b49",
+              "name": "Daily ACU consumption totals.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "enterprise",
+                    "consumption",
+                    "daily"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"days\": [\n    {\n      \"date\": \"2008-06-07\",\n      \"acu_consumed\": 9108.89484270773\n    },\n    {\n      \"date\": \"1996-05-30\",\n      \"acu_consumed\": 7075.8691333899405\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8a73ae1-df72-48cd-aaa2-9b2f4c77dd96",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "enterprise",
+                    "consumption",
+                    "daily"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fd9ad08-5e11-4e31-9771-d2a200bd7881",
+          "name": "Get per-session daily ACU consumption",
+          "request": {
+            "name": "Get per-session daily ACU consumption",
+            "description": {},
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "organizations",
+                ":org_id",
+                "consumption",
+                "sessions"
+              ],
+              "host": [
+                "api",
+                "devin",
+                "ai"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_id",
+                  "description": "(Required) The organization ID, found in Settings > Service Users."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "348ebd65-e42b-4885-bc2a-99904d3eb679",
+              "name": "Per-session daily ACU consumption.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    ":org_id",
+                    "consumption",
+                    "sessions"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) The organization ID, found in Settings > Service Users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessions\": [\n    {\n      \"session_id\": \"string\",\n      \"date\": \"1979-11-21\",\n      \"acu_consumed\": 4508.702003578309\n    },\n    {\n      \"session_id\": \"string\",\n      \"date\": \"1987-11-05\",\n      \"acu_consumed\": 715.1363823988754\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d21ef2ba-35ed-431e-9bc9-6254a6b7b047",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "organizations",
+                    ":org_id",
+                    "consumption",
+                    "sessions"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_id",
+                      "description": "(Required) The organization ID, found in Settings > Service Users."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0bb11695-6396-42eb-a58e-cf3a4049df1e",
+    "name": "Devin API (Cognition Labs) Attachments Consumption API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.\n\nContact Support:\n Name: Cognition",
+      "type": "text/plain"
+    }
+  }
+}

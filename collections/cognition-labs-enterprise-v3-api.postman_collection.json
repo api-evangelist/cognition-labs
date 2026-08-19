@@ -1,0 +1,357 @@
+{
+  "item": [
+    {
+      "id": "b18ba04b-705a-4e87-a52e-7e6c34816bac",
+      "name": "Enterprise (v3)",
+      "description": {
+        "content": "Cross-organization administration.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5533866a-e6b6-4f9f-bb3f-01dc92159467",
+          "name": "List enterprise organizations",
+          "request": {
+            "name": "List enterprise organizations",
+            "description": {
+              "content": "Lists every organization under the enterprise account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "enterprise",
+                "organizations"
+              ],
+              "host": [
+                "api",
+                "devin",
+                "ai"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "453d059f-6363-4f6d-8b8a-723ef4a6bbe3",
+              "name": "A list of organizations.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "enterprise",
+                    "organizations"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"organizations\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06fbef3f-1385-4d5c-adad-0865d73ae13c",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "enterprise",
+                    "organizations"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5918fc98-bbe6-44e0-b071-83b32f2490d9",
+          "name": "List enterprise audit logs",
+          "request": {
+            "name": "List enterprise audit logs",
+            "description": {
+              "content": "Paginated audit log entries with time-based filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "enterprise",
+                "audit-logs"
+              ],
+              "host": [
+                "api",
+                "devin",
+                "ai"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<integer>",
+                  "description": "Unix timestamp (seconds) lower bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<integer>",
+                  "description": "Unix timestamp (seconds) upper bound."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ce19dbfe-ef7a-4079-8ac4-cf529ce6ac5e",
+              "name": "A page of audit log entries.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "enterprise",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"key_0\": 2529.3302573732167\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ],\n  \"next_cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d40f4320-91d5-4930-9be8-d8d26404a537",
+              "name": "Missing or invalid bearer token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "enterprise",
+                    "audit-logs"
+                  ],
+                  "host": [
+                    "api",
+                    "devin",
+                    "ai"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.devin.ai/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3517c9fa-5e9a-44a8-8c31-b7a669639dd3",
+    "name": "Devin API (Cognition Labs) Attachments Enterprise (v3) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.\n\nContact Support:\n Name: Cognition",
+      "type": "text/plain"
+    }
+  }
+}
