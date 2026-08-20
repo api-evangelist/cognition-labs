@@ -25,6 +25,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cognition-labs.png
 tags:
+- Artificial Intelligence
+- AI Agent
+- Autonomous Coding
+- Software Engineering
+- LLM
+- Devin
+tags_raw:
 - AI
 - AI Agent
 - Autonomous Coding
@@ -277,6 +284,8 @@ apis:
   humanURL: https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session
   baseURL: https://api.devin.ai/v1
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
