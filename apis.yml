@@ -10,6 +10,18 @@ description: Cognition Labs is the applied AI lab behind Devin, the autonomous A
   Agent Compute Unit (ACU) consumption - across a legacy v1 surface, a v2 enterprise
   surface, and a current v3 organizations/enterprise surface built around service-user
   and personal access tokens.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
