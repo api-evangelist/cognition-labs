@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Devin API (Cognition Labs) Attachments Sessions API
   description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.
@@ -164,18 +164,29 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
-    SessionStatusEnum:
-      type: string
-      enum:
-      - working
-      - blocked
-      - expired
-      - finished
-      - suspend_requested
-      - suspend_requested_frontend
-      - resume_requested
-      - resume_requested_frontend
-      - resumed
+    SessionDetail:
+      allOf:
+      - $ref: '#/components/schemas/SessionSummary'
+      - type: object
+        properties:
+          messages:
+            type: array
+            default: []
+            items:
+              type: object
+              additionalProperties: true
+    CreateSessionResponse:
+      type: object
+      required:
+      - session_id
+      - url
+      properties:
+        session_id:
+          type: string
+        url:
+          type: string
+        is_new_session:
+          type: boolean
     SessionSummary:
       type: object
       required:
@@ -216,6 +227,22 @@ components:
         structured_output:
           type: object
           additionalProperties: true
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
     CreateSessionInput:
       type: object
       required:
@@ -232,16 +259,18 @@ components:
         playbook_id:
           type: string
         knowledge_ids:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Null uses all knowledge; empty array uses none.
         secret_ids:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
           description: Null uses all secrets; empty array uses none.
         session_secrets:
           type: array
@@ -272,45 +301,25 @@ components:
         unlisted:
           type: boolean
           default: false
-    ValidationErrorBody:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
-    CreateSessionResponse:
-      type: object
-      required:
-      - session_id
-      - url
-      properties:
-        session_id:
-          type: string
-        url:
-          type: string
-        is_new_session:
-          type: boolean
-    SessionDetail:
-      allOf:
-      - $ref: '#/components/schemas/SessionSummary'
-      - type: object
-        properties:
-          messages:
-            type: array
-            default: []
-            items:
-              type: object
-              additionalProperties: true
+    SessionStatusEnum:
+      type: string
+      enum:
+      - working
+      - blocked
+      - expired
+      - finished
+      - suspend_requested
+      - suspend_requested_frontend
+      - resume_requested
+      - resume_requested_frontend
+      - resumed
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
   parameters:
     SessionId:
       name: session_id
@@ -319,13 +328,6 @@ components:
       description: The unique identifier of the session.
       schema:
         type: string
-  responses:
-    ValidationError:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationErrorBody'
   securitySchemes:
     bearerAuth:
       type: http

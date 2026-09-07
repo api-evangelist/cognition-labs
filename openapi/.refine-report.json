@@ -25,6 +25,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "cognition-labs-attachments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-consumption-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-enterprise-v3-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-knowledge-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-messages-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-organizations-v3-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-playbooks-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-secrets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "cognition-labs-sessions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
