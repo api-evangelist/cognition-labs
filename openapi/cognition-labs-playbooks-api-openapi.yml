@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Devin API (Cognition Labs) Attachments Playbooks API
-  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically. This document models the legacy v1 surface (api.devin.ai/v1, still live and documented, authenticated with apk_user_*/apk_* keys) in full - sessions, messages, attachments, knowledge, playbooks, and secrets - plus representative endpoints from the current v3 organizations/enterprise surface (api.devin.ai/v3, authenticated with cog_ service-user or personal access tokens) and the v2/v3 consumption (ACU usage) endpoints. The v2/v3 enterprise surface has additional organization, member, and API-key management endpoints not exhaustively modeled here; see the humanURL/APIReference links in apis.yml for the full documented set. All endpoints are transcribed from Cognition's public documentation at https://docs.devin.ai and have not been exercised against production credentials, which require an active paid Devin plan or Enterprise contract.
+  title: Devin API (Cognition Labs) Playbooks API
+  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically.
   version: '1.0'
   contact:
     name: Cognition
@@ -114,13 +114,6 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
-  responses:
-    ValidationError:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationErrorBody'
   schemas:
     ValidationErrorBody:
       type: object
@@ -138,20 +131,6 @@ components:
                 type: string
               type:
                 type: string
-    PlaybookInput:
-      type: object
-      required:
-      - title
-      - body
-      properties:
-        title:
-          type: string
-        body:
-          type: string
-        macro:
-          type: string
-        access_type:
-          type: string
     Playbook:
       allOf:
       - $ref: '#/components/schemas/PlaybookInput'
@@ -181,6 +160,27 @@ components:
             type:
             - string
             - 'null'
+    PlaybookInput:
+      type: object
+      required:
+      - title
+      - body
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        macro:
+          type: string
+        access_type:
+          type: string
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
   securitySchemes:
     bearerAuth:
       type: http

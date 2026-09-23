@@ -1,15 +1,7 @@
 {
   "provider": "cognition-labs",
   "sources": [
-    "cognition-labs-attachments-api-openapi.yml",
-    "cognition-labs-consumption-api-openapi.yml",
-    "cognition-labs-enterprise-v3-api-openapi.yml",
-    "cognition-labs-knowledge-api-openapi.yml",
-    "cognition-labs-messages-api-openapi.yml",
-    "cognition-labs-organizations-v3-api-openapi.yml",
-    "cognition-labs-playbooks-api-openapi.yml",
-    "cognition-labs-secrets-api-openapi.yml",
-    "cognition-labs-sessions-api-openapi.yml"
+    "_original/cognition-labs-openapi.yml"
   ],
   "outputs": [
     "cognition-labs-attachments-api-openapi.yml",
@@ -26,16 +18,19 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "cognition-labs-attachments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-consumption-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-enterprise-v3-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-knowledge-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-messages-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-organizations-v3-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-playbooks-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-secrets-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "cognition-labs-sessions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "cognition-labs-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "cognition-labs-attachments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-consumption-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-enterprise-v3-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-knowledge-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-organizations-v3-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-playbooks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-secrets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cognition-labs-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
