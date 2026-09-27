@@ -163,42 +163,15 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      description: The unique identifier of the session.
+      schema:
+        type: string
   schemas:
-    SessionStatusEnum:
-      type: string
-      enum:
-      - working
-      - blocked
-      - expired
-      - finished
-      - suspend_requested
-      - suspend_requested_frontend
-      - resume_requested
-      - resume_requested_frontend
-      - resumed
-    SessionDetail:
-      allOf:
-      - $ref: '#/components/schemas/SessionSummary'
-      - type: object
-        properties:
-          messages:
-            type: array
-            default: []
-            items:
-              type: object
-              additionalProperties: true
-    CreateSessionResponse:
-      type: object
-      required:
-      - session_id
-      - url
-      properties:
-        session_id:
-          type: string
-        url:
-          type: string
-        is_new_session:
-          type: boolean
     ValidationErrorBody:
       type: object
       properties:
@@ -215,46 +188,18 @@ components:
                 type: string
               type:
                 type: string
-    SessionSummary:
-      type: object
-      required:
-      - session_id
-      - status
-      - created_at
-      - updated_at
-      properties:
-        session_id:
-          type: string
-        status:
-          type: string
-        status_enum:
-          $ref: '#/components/schemas/SessionStatusEnum'
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-        title:
-          type: string
-        requesting_user_email:
-          type: string
-        playbook_id:
-          type: string
-        snapshot_id:
-          type: string
-        tags:
-          type: array
-          items:
-            type: string
-        pull_request:
-          type: object
-          properties:
-            url:
-              type: string
-        structured_output:
-          type: object
-          additionalProperties: true
+    SessionStatusEnum:
+      type: string
+      enum:
+      - working
+      - blocked
+      - expired
+      - finished
+      - suspend_requested
+      - suspend_requested_frontend
+      - resume_requested
+      - resume_requested_frontend
+      - resumed
     CreateSessionInput:
       type: object
       required:
@@ -313,6 +258,69 @@ components:
         unlisted:
           type: boolean
           default: false
+    CreateSessionResponse:
+      type: object
+      required:
+      - session_id
+      - url
+      properties:
+        session_id:
+          type: string
+        url:
+          type: string
+        is_new_session:
+          type: boolean
+    SessionSummary:
+      type: object
+      required:
+      - session_id
+      - status
+      - created_at
+      - updated_at
+      properties:
+        session_id:
+          type: string
+        status:
+          type: string
+        status_enum:
+          $ref: '#/components/schemas/SessionStatusEnum'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        requesting_user_email:
+          type: string
+        playbook_id:
+          type: string
+        snapshot_id:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        pull_request:
+          type: object
+          properties:
+            url:
+              type: string
+        structured_output:
+          type: object
+          additionalProperties: true
+    SessionDetail:
+      allOf:
+      - $ref: '#/components/schemas/SessionSummary'
+      - type: object
+        properties:
+          messages:
+            type: array
+            default: []
+            items:
+              type: object
+              additionalProperties: true
   responses:
     ValidationError:
       description: The request payload failed validation.
@@ -320,14 +328,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationErrorBody'
-  parameters:
-    SessionId:
-      name: session_id
-      in: path
-      required: true
-      description: The unique identifier of the session.
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

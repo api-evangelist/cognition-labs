@@ -92,6 +92,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
   schemas:
     ValidationErrorBody:
       type: object
@@ -109,13 +116,6 @@ components:
                 type: string
               type:
                 type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationErrorBody'
   securitySchemes:
     bearerAuth:
       type: http

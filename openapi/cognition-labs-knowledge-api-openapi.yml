@@ -108,6 +108,18 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    KnowledgeFolder:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        created_at:
+          type: string
+          format: date-time
     KnowledgeInput:
       type: object
       required:
@@ -167,18 +179,6 @@ components:
                 type:
                 - string
                 - 'null'
-    KnowledgeFolder:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        created_at:
-          type: string
-          format: date-time
   responses:
     ValidationError:
       description: The request payload failed validation.
