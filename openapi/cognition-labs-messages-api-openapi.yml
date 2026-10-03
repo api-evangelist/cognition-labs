@@ -55,21 +55,6 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
-  parameters:
-    SessionId:
-      name: session_id
-      in: path
-      required: true
-      description: The unique identifier of the session.
-      schema:
-        type: string
-  responses:
-    ValidationError:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationErrorBody'
   schemas:
     ValidationErrorBody:
       type: object
@@ -87,6 +72,21 @@ components:
                 type: string
               type:
                 type: string
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      description: The unique identifier of the session.
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

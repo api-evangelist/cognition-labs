@@ -115,6 +115,22 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
     PlaybookInput:
       type: object
       required:
@@ -158,22 +174,6 @@ components:
             type:
             - string
             - 'null'
-    ValidationErrorBody:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
   responses:
     ValidationError:
       description: The request payload failed validation.

@@ -163,43 +163,7 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
-  parameters:
-    SessionId:
-      name: session_id
-      in: path
-      required: true
-      description: The unique identifier of the session.
-      schema:
-        type: string
   schemas:
-    ValidationErrorBody:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
-    SessionStatusEnum:
-      type: string
-      enum:
-      - working
-      - blocked
-      - expired
-      - finished
-      - suspend_requested
-      - suspend_requested_frontend
-      - resume_requested
-      - resume_requested_frontend
-      - resumed
     CreateSessionInput:
       type: object
       required:
@@ -258,18 +222,6 @@ components:
         unlisted:
           type: boolean
           default: false
-    CreateSessionResponse:
-      type: object
-      required:
-      - session_id
-      - url
-      properties:
-        session_id:
-          type: string
-        url:
-          type: string
-        is_new_session:
-          type: boolean
     SessionSummary:
       type: object
       required:
@@ -310,6 +262,22 @@ components:
         structured_output:
           type: object
           additionalProperties: true
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
     SessionDetail:
       allOf:
       - $ref: '#/components/schemas/SessionSummary'
@@ -321,6 +289,38 @@ components:
             items:
               type: object
               additionalProperties: true
+    SessionStatusEnum:
+      type: string
+      enum:
+      - working
+      - blocked
+      - expired
+      - finished
+      - suspend_requested
+      - suspend_requested_frontend
+      - resume_requested
+      - resume_requested_frontend
+      - resumed
+    CreateSessionResponse:
+      type: object
+      required:
+      - session_id
+      - url
+      properties:
+        session_id:
+          type: string
+        url:
+          type: string
+        is_new_session:
+          type: boolean
+  parameters:
+    SessionId:
+      name: session_id
+      in: path
+      required: true
+      description: The unique identifier of the session.
+      schema:
+        type: string
   responses:
     ValidationError:
       description: The request payload failed validation.
