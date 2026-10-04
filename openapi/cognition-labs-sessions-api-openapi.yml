@@ -1,19 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Devin API (Cognition Labs) Sessions API
-  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically.
+  title: Cognition Labs Sessions API
   version: '1.0'
-  contact:
-    name: Cognition
-    url: https://cognition.ai
-  license:
-    name: Proprietary
-    url: https://docs.devin.ai/admin/security
+  description: 'Operations tagged Sessions across 2 of this provider''s published API definitions: cognition-labs-openapi.yml, cognition-labs-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.devin.ai/v1
   description: Legacy v1 API (apk_user_*/apk_* keys)
 - url: https://api.devin.ai/v3
   description: Current v3 organizations/enterprise API (cog_ keys)
+- url: https://api.devin.ai
+  description: Devin Production Server
 security:
 - bearerAuth: []
 tags:
@@ -91,6 +87,11 @@ paths:
                       $ref: '#/components/schemas/SessionSummary'
         '422':
           $ref: '#/components/responses/ValidationError'
+    servers:
+    - url: https://api.devin.ai/v1
+      description: Legacy v1 API (apk_user_*/apk_* keys)
+    - url: https://api.devin.ai/v3
+      description: Current v3 organizations/enterprise API (cog_ keys)
   /sessions/{session_id}:
     parameters:
     - $ref: '#/components/parameters/SessionId'
@@ -127,6 +128,11 @@ paths:
                     type: string
         '422':
           $ref: '#/components/responses/ValidationError'
+    servers:
+    - url: https://api.devin.ai/v1
+      description: Legacy v1 API (apk_user_*/apk_* keys)
+    - url: https://api.devin.ai/v3
+      description: Current v3 organizations/enterprise API (cog_ keys)
   /sessions/{session_id}/tags:
     parameters:
     - $ref: '#/components/parameters/SessionId'
@@ -162,8 +168,530 @@ paths:
                     type: string
         '422':
           $ref: '#/components/responses/ValidationError'
+    servers:
+    - url: https://api.devin.ai/v1
+      description: Legacy v1 API (apk_user_*/apk_* keys)
+    - url: https://api.devin.ai/v3
+      description: Current v3 organizations/enterprise API (cog_ keys)
+  /v1/sessions:
+    get:
+      tags:
+      - Sessions
+      summary: List all sessions
+      description: 'Get a paginated list of Devin sessions. The sessions are ordered by creation date
+
+        in descending order (newest first). Each session includes its status, metadata,
+
+        and any structured output from the latest events.'
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of sessions to return per page
+        required: false
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+          maximum: 1000
+      - name: offset
+        in: query
+        description: Number of sessions to skip for pagination
+        required: false
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+      - name: tags
+        in: query
+        description: Filter sessions by tags
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: List of sessions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sessions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        session_id:
+                          type: string
+                          description: Unique identifier for the session
+                        status:
+                          type: string
+                          description: Current status of the session
+                        title:
+                          type: string
+                          description: Title or description of the session
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the session was created
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the session was last updated
+                        snapshot_id:
+                          type: string
+                          nullable: true
+                          description: ID of the associated snapshot, if any
+                        playbook_id:
+                          type: string
+                          nullable: true
+                          description: ID of the associated playbook, if any
+                        tags:
+                          type: array
+                          nullable: true
+                          items:
+                            type: string
+                          description: List of tags associated with the session
+                        pull_request:
+                          type: object
+                          nullable: true
+                          properties:
+                            url:
+                              type: string
+                              description: URL of the associated pull request
+                          description: Pull request information, if any
+                        structured_output:
+                          type: string
+                          nullable: true
+                          description: Latest structured output value from events
+                        status_enum:
+                          type: string
+                          nullable: true
+                          description: Latest status enum from status updates
+                        requesting_user_email:
+                          type: string
+                          nullable: true
+                          description: Email address of the user who created the session
+                      required:
+                      - session_id
+                      - status
+                      - title
+                      - created_at
+                      - updated_at
+                required:
+                - sessions
+              examples:
+                list-sessions-response:
+                  summary: Example response listing sessions
+                  value:
+                    sessions:
+                    - session_id: devin-xxx
+                      status: running
+                      title: 'Review PR #123'
+                      created_at: '2024-01-01T00:00:00Z'
+                      updated_at: '2024-01-01T00:01:00Z'
+                      snapshot_id: null
+                      playbook_id: null
+                      pull_request:
+                        url: https://github.com/example/repo/pull/123
+                      structured_output: Task completed successfully
+                      status_enum: working
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: getV1Sessions
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Sessions
+      summary: Create a new session
+      description: 'Create a new Devin session. Provide a prompt to describe the task.
+
+        The session can optionally be made unlisted or idempotent.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+            examples:
+              create-session-example:
+                summary: Example request for creating a session
+                value:
+                  prompt: Review the pull request at https://github.com/example/repo/pull/123
+                  idempotent: true
+      responses:
+        '200':
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse_2'
+              examples:
+                create-session-response:
+                  summary: Example response for creating a session
+                  value:
+                    session_id: devin-xxx
+                    url: https://app.devin.ai/sessions/xxx
+                    is_new_session: true
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: postV1Sessions
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.devin.ai
+      description: Devin Production Server
+  /v1/sessions/{session_id}:
+    get:
+      tags:
+      - Sessions
+      summary: Retrieve details about an existing session
+      description: 'Get information about the session''s current status, timestamps,
+
+        snapshot/playbook references, and any structured output.'
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        description: The session ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns session details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionResponse'
+              examples:
+                get-session-details:
+                  summary: Example session details
+                  value:
+                    session_id: devin-abc123def456
+                    status: running
+                    title: 'Review PR #123'
+                    created_at: '2024-01-01T00:00:00.000000+00:00'
+                    updated_at: '2024-01-01T00:05:30.123456+00:00'
+                    snapshot_id: null
+                    playbook_id: null
+                    tags:
+                    - api
+                    - documentation
+                    - review
+                    pull_request:
+                      url: https://github.com/example/repo/pull/123
+                    structured_output:
+                      result: success
+                      files_modified: 3
+                    status_enum: blocked
+                    messages:
+                    - type: initial_user_message
+                      event_id: event-abc123-def4-5678-9012-abcdef123456
+                      message: Review the pull request at https://github.com/example/repo/pull/123
+                      timestamp: '2024-01-01T00:00:00.000000+00:00'
+                      username: user@example.com
+                      origin: web
+                      user_id: user-123e4567-e89b-12d3-a456-426614174000
+                    - type: devin_message
+                      event_id: event-def456-abc1-2345-6789-fedcba654321
+                      message: I'll review the pull request for you. Let me analyze the changes.
+                      timestamp: '2024-01-01T00:00:15.123456+00:00'
+                    - type: user_message
+                      event_id: event-789abc-def0-1234-5678-9abcdef01234
+                      message: Please focus on the security implications
+                      timestamp: '2024-01-01T00:03:45.987654+00:00'
+                      username: user@example.com
+                      origin: web
+                      user_id: user-123e4567-e89b-12d3-a456-426614174000
+                    - type: devin_message
+                      event_id: event-012def-abc3-4567-8901-23456789abcd
+                      message: I've completed the security review. Found 2 potential issues that need attention.
+                      timestamp: '2024-01-01T00:05:30.123456+00:00'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: getV1SessionsBySessionId
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Sessions
+      summary: Terminate an existing session
+      description: 'Terminate a running Devin session by sending a stop event. This will gracefully
+
+        stop the session and prevent further execution.
+
+
+        **Permission Requirements:**
+
+        - If the `session-write-only-owner` feature flag is enabled for your organization,
+
+        only the session owner can terminate the session.
+
+        - Otherwise, any user in the organization with access to the session can terminate it.
+
+
+        **Status Validation:**
+
+        - Cannot terminate a session that has already exited (status: "exit")
+
+        - Sessions in other states (running, blocked, suspended) can be terminated'
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        description: The session ID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Session terminated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Session terminated successfully
+              examples:
+                terminate-session-success:
+                  summary: Successful termination
+                  value:
+                    detail: Session terminated successfully
+        '400':
+          description: Bad Request - Session already exited or invalid state
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+              examples:
+                already-exited:
+                  summary: Session already exited
+                  value:
+                    detail: Devin session already exited
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Forbidden - Only session owner can terminate (when feature flag enabled)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+              examples:
+                owner-only:
+                  summary: Owner-only restriction
+                  value:
+                    detail: Forbidden - Only session owner can terminate
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: deleteV1SessionsBySessionId
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.devin.ai
+      description: Devin Production Server
+  /v1/sessions/{session_id}/message:
+    post:
+      tags:
+      - Sessions
+      summary: Send a message to an existing session
+      description: 'Interact with an active Devin session by sending a message. This is
+
+        particularly useful in sessions waiting for user input or confirmations.'
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        description: The session ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageRequest'
+            examples:
+              send-message-example:
+                summary: Example sending a message
+                value:
+                  message: Please proceed with the next step
+      responses:
+        '204':
+          description: No Content on success
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: postV1SessionsBySessionIdMessage
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.devin.ai
+      description: Devin Production Server
+  /v1/sessions/{session_id}/tags:
+    put:
+      tags:
+      - Sessions
+      summary: Update session tags
+      description: Update the tags associated with a Devin session.
+      parameters:
+      - name: session_id
+        in: path
+        required: true
+        description: The session ID
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditSessionTagsRequest'
+            examples:
+              update-tags-example:
+                summary: Example updating session tags
+                value:
+                  tags:
+                  - production
+                  - api
+                  - documentation
+      responses:
+        '200':
+          description: Tags updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Tags updated successfully
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: putV1SessionsBySessionIdTags
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.devin.ai
+      description: Devin Production Server
 components:
   schemas:
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+    CreateSessionResponse:
+      type: object
+      required:
+      - session_id
+      - url
+      properties:
+        session_id:
+          type: string
+        url:
+          type: string
+        is_new_session:
+          type: boolean
+    SessionSummary:
+      type: object
+      required:
+      - session_id
+      - status
+      - created_at
+      - updated_at
+      properties:
+        session_id:
+          type: string
+        status:
+          type: string
+        status_enum:
+          $ref: '#/components/schemas/SessionStatusEnum'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        title:
+          type: string
+        requesting_user_email:
+          type: string
+        playbook_id:
+          type: string
+        snapshot_id:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        pull_request:
+          type: object
+          properties:
+            url:
+              type: string
+        structured_output:
+          type: object
+          additionalProperties: true
+    SessionDetail:
+      allOf:
+      - $ref: '#/components/schemas/SessionSummary'
+      - type: object
+        properties:
+          messages:
+            type: array
+            default: []
+            items:
+              type: object
+              additionalProperties: true
+    SessionStatusEnum:
+      type: string
+      enum:
+      - working
+      - blocked
+      - expired
+      - finished
+      - suspend_requested
+      - suspend_requested_frontend
+      - resume_requested
+      - resume_requested_frontend
+      - resumed
     CreateSessionInput:
       type: object
       required:
@@ -222,97 +750,211 @@ components:
         unlisted:
           type: boolean
           default: false
-    SessionSummary:
+    SendMessageRequest:
       type: object
+      properties:
+        message:
+          type: string
+          description: The message to send to Devin
       required:
-      - session_id
-      - status
-      - created_at
-      - updated_at
+      - message
+      description: Request body for sending a message to an existing Devin session
+    CreateSessionResponse_2:
+      type: object
       properties:
         session_id:
           type: string
+          description: Unique identifier for the session
+        url:
+          type: string
+          description: URL to view the session in the web interface
+        is_new_session:
+          type: boolean
+          description: Indicates if a new session was created (only present if idempotent=true)
+      required:
+      - session_id
+      - url
+      description: Response body returned when a session is successfully created
+    GetSessionResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+          description: Unique identifier for the session
         status:
           type: string
-        status_enum:
-          $ref: '#/components/schemas/SessionStatusEnum'
+          description: Current status of the session
+        title:
+          type: string
+          description: Session title
+          nullable: true
         created_at:
           type: string
           format: date-time
+          description: Creation timestamp (ISO 8601)
         updated_at:
           type: string
           format: date-time
-        title:
-          type: string
-        requesting_user_email:
-          type: string
-        playbook_id:
-          type: string
+          description: Last update timestamp (ISO 8601)
         snapshot_id:
           type: string
+          nullable: true
+          description: ID of the machine snapshot used
+        playbook_id:
+          type: string
+          nullable: true
+          description: ID of the playbook used
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: List of tags associated with the session
+        pull_request:
+          type: object
+          nullable: true
+          description: Pull request information (null if no PR is associated) containing url field
+        structured_output:
+          type: object
+          description: Task-specific structured output
+          additionalProperties: true
+          nullable: true
+        status_enum:
+          type: string
+          enum:
+          - working
+          - blocked
+          - expired
+          - finished
+          - suspend_requested
+          - suspend_requested_frontend
+          - resume_requested
+          - resume_requested_frontend
+          - resumed
+          description: 'Session status enumerations:
+
+            - "working": Devin is actively working on a task
+
+            - "blocked": Devin is waiting for user input or response
+
+            - "expired": Session has expired
+
+            - "finished": Session has completed
+
+            - "suspend_requested": Request to suspend the session
+
+            - "suspend_requested_frontend": Frontend-initiated suspend request
+
+            - "resume_requested": Request to resume the session
+
+            - "resume_requested_frontend": Frontend-initiated resume request
+
+            - "resumed": Session has been resumed
+
+            '
+          nullable: true
+        messages:
+          type: array
+          description: List of messages in the session
+          items:
+            $ref: '#/components/schemas/Message'
+          nullable: true
+      required:
+      - session_id
+      - status
+      description: Detailed information about an existing session
+    CreateSessionRequest:
+      type: object
+      properties:
+        prompt:
+          type: string
+          description: The task description for Devin
+        snapshot_id:
+          type: string
+          nullable: true
+          description: ID of a machine snapshot to use
+        unlisted:
+          type: boolean
+          nullable: true
+          description: Whether the session should be unlisted
+        idempotent:
+          type: boolean
+          nullable: true
+          description: Enable idempotent session creation
+        max_acu_limit:
+          type: integer
+          nullable: true
+          description: Maximum ACU limit for the session
+        secret_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: List of secret IDs to use. If None, use all secrets. If empty list, use no secrets.
+        knowledge_ids:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: List of knowledge IDs to use. If None, use all knowledge. If empty list, use no knowledge.
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: List of tags to add to the session.
+        title:
+          type: string
+          nullable: true
+          description: Custom title for the session. If None, a title will be generated automatically.
+      required:
+      - prompt
+      description: Request body for creating a new Devin session
+    Message:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the message
+        event_id:
+          type: string
+          description: Unique identifier for the event that generated this message
+        message:
+          type: string
+          description: The content of the message
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the message was created
+        username:
+          type: string
+          description: The username associated with the message
+          nullable: true
+        origin:
+          type: string
+          description: The origin of the message
+          nullable: true
+        user_id:
+          type: string
+          description: The unique identifier of the user who sent the message
+          nullable: true
+      required:
+      - type
+      - event_id
+      - message
+      - timestamp
+      description: A message in a Devin session
+    EditSessionTagsRequest:
+      type: object
+      properties:
         tags:
           type: array
           items:
             type: string
-        pull_request:
-          type: object
-          properties:
-            url:
-              type: string
-        structured_output:
-          type: object
-          additionalProperties: true
-    ValidationErrorBody:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
-    SessionDetail:
-      allOf:
-      - $ref: '#/components/schemas/SessionSummary'
-      - type: object
-        properties:
-          messages:
-            type: array
-            default: []
-            items:
-              type: object
-              additionalProperties: true
-    SessionStatusEnum:
-      type: string
-      enum:
-      - working
-      - blocked
-      - expired
-      - finished
-      - suspend_requested
-      - suspend_requested_frontend
-      - resume_requested
-      - resume_requested_frontend
-      - resumed
-    CreateSessionResponse:
-      type: object
+          description: List of tags for the session
       required:
-      - session_id
-      - url
-      properties:
-        session_id:
-          type: string
-        url:
-          type: string
-        is_new_session:
-          type: boolean
+      - tags
+      description: Request body for updating session tags
   parameters:
     SessionId:
       name: session_id
@@ -328,8 +970,54 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationErrorBody'
+    BadRequestError:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Invalid input or request
+    UnauthorizedError:
+      description: Unauthorized - Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Missing or invalid Authorization header
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Something went wrong
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: The requested resource does not exist
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization: Bearer YOUR_API_KEY`.'
+externalDocs:
+  description: Visit Devin's documentation page for more info
+  url: https://docs.devin.ai
+x-refined-from:
+- cognition-labs-openapi.yml
+- cognition-labs-openapi.yaml

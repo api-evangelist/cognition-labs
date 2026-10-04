@@ -1,0 +1,150 @@
+generated: '2026-10-04'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 12
+  own: 4
+  other_domain: 6
+  platform: 2
+  roles:
+  - api
+  - docs
+  - marketing
+  - other
+  - source
+  - support
+  - website
+hosts:
+- host: api.cognition.ai
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: cognition.ai
+  role: api
+  relation: own
+- host: api.cognition.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: cognition.com
+  role: api
+  relation: other-domain
+- host: api.devin.ai
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: devin.ai
+  role: api
+  relation: other-domain
+- host: cognition.ai
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Website
+  serves: []
+  registrable_domain: cognition.ai
+  role: website
+  relation: own
+- host: cognition.com
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Security
+  - PrivacyPolicy
+  - Blog
+  serves: []
+  registrable_domain: cognition.com
+  role: marketing
+  relation: other-domain
+- host: docs.devin.ai
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - GettingStarted
+  - APIReference
+  - Documentation
+  serves:
+  - docs
+  - spec
+  - cdn
+  - documentation
+  - hosting
+  vendor: cloudflare
+  registrable_domain: devin.ai
+  role: docs
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: mintlify.com
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: mintlify.com
+  role: other
+  relation: other-domain
+- host: sequelize.org
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: sequelize.org
+  role: other
+  relation: other-domain
+- host: support.cognition.ai
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: cognition.ai
+  role: support
+  relation: own
+- host: trust.cognition.ai
+  found_by:
+  - pointer
+  types:
+  - Compliance
+  serves: []
+  registrable_domain: cognition.ai
+  role: other
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

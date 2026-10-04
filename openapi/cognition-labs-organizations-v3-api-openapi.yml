@@ -86,6 +86,34 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+    CreateSessionResponse:
+      type: object
+      required:
+      - session_id
+      - url
+      properties:
+        session_id:
+          type: string
+        url:
+          type: string
+        is_new_session:
+          type: boolean
     CreateSessionInput:
       type: object
       required:
@@ -144,34 +172,6 @@ components:
         unlisted:
           type: boolean
           default: false
-    ValidationErrorBody:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
-    CreateSessionResponse:
-      type: object
-      required:
-      - session_id
-      - url
-      properties:
-        session_id:
-          type: string
-        url:
-          type: string
-        is_new_session:
-          type: boolean
   responses:
     Unauthorized:
       description: Missing or invalid bearer token.

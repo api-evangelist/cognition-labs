@@ -1,0 +1,38 @@
+generated: '2026-10-04'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://trust.cognition.ai/
+sources:
+- https://trust.cognition.ai/
+- https://docs.devin.ai/work-with-devin/security-swarm.md
+- https://docs.devin.ai/product-guides/security-profiles.md
+- https://docs.devin.ai/admin/security.md
+standards:
+- id: ccpa
+  conforms: true
+  evidence: Compliance CCPA
+- id: soc2
+  conforms: true
+  evidence: SOC 2 Type 2
+- id: iso-27001
+  conforms: true
+  evidence: ISO/IEC 27001:2022
+- id: openapi-3.1
+  conforms: true
+  evidence: the document declares 3.1.0
+- id: openapi-3.2
+  conforms: true
+  evidence: the document declares 3.2.0
+- id: oauth2
+  conforms: false
+  evidence: 'securitySchemes: bearerAuth (http)'
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take cursor, limit, offset
+docs: https://trust.cognition.ai/

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cognition-labs/main/json-schema/cognition-labs-create-session-response-schema.json",
+  "title": "CreateSessionResponse",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cognition-labs-organizations-v3-api-openapi.yml#/components/schemas/CreateSessionResponse",
+  "type": "object",
+  "required": [
+    "session_id",
+    "url"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "is_new_session": {
+      "type": "boolean"
+    }
+  }
+}

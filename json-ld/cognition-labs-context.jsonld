@@ -1,0 +1,315 @@
+{
+  "@context": {
+    "@vocab": "https://cognition.ai/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "cognition": "https://cognition.ai/schema#",
+    "ValidationErrorBody": "cognition:ValidationErrorBody",
+    "detail": {
+      "@id": "cognition:detail",
+      "@container": "@list"
+    },
+    "KnowledgeFolder": "cognition:KnowledgeFolder",
+    "id": {
+      "@id": "cognition:id",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "cognition:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "cognition:description",
+      "@type": "xsd:string"
+    },
+    "created_at": {
+      "@id": "cognition:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "KnowledgeInput": "cognition:KnowledgeInput",
+    "body": {
+      "@id": "cognition:body",
+      "@type": "xsd:string"
+    },
+    "trigger_description": {
+      "@id": "cognition:trigger_description",
+      "@type": "xsd:string"
+    },
+    "macro": {
+      "@id": "cognition:macro",
+      "@type": "xsd:string"
+    },
+    "parent_folder_id": {
+      "@id": "cognition:parent_folder_id",
+      "@type": "xsd:string"
+    },
+    "pinned_repo": {
+      "@id": "cognition:pinned_repo",
+      "@type": "xsd:string"
+    },
+    "CreateSessionRequest": "cognition:CreateSessionRequest",
+    "prompt": {
+      "@id": "cognition:prompt",
+      "@type": "xsd:string"
+    },
+    "snapshot_id": {
+      "@id": "cognition:snapshot_id",
+      "@type": "xsd:string"
+    },
+    "unlisted": {
+      "@id": "cognition:unlisted",
+      "@type": "xsd:boolean"
+    },
+    "idempotent": {
+      "@id": "cognition:idempotent",
+      "@type": "xsd:boolean"
+    },
+    "max_acu_limit": {
+      "@id": "cognition:max_acu_limit",
+      "@type": "xsd:integer"
+    },
+    "secret_ids": {
+      "@id": "cognition:secret_ids",
+      "@container": "@list"
+    },
+    "knowledge_ids": {
+      "@id": "cognition:knowledge_ids",
+      "@container": "@list"
+    },
+    "tags": {
+      "@id": "cognition:tags",
+      "@container": "@list"
+    },
+    "title": {
+      "@id": "cognition:title",
+      "@type": "xsd:string"
+    },
+    "CreateSessionResponse": "cognition:CreateSessionResponse",
+    "session_id": {
+      "@id": "cognition:session_id",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "cognition:url",
+      "@type": "xsd:string"
+    },
+    "is_new_session": {
+      "@id": "cognition:is_new_session",
+      "@type": "xsd:boolean"
+    },
+    "Message": "cognition:Message",
+    "type": {
+      "@id": "cognition:type",
+      "@type": "xsd:string"
+    },
+    "event_id": {
+      "@id": "cognition:event_id",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "cognition:message",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "cognition:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "username": {
+      "@id": "cognition:username",
+      "@type": "xsd:string"
+    },
+    "origin": {
+      "@id": "cognition:origin",
+      "@type": "xsd:string"
+    },
+    "user_id": {
+      "@id": "cognition:user_id",
+      "@type": "xsd:string"
+    },
+    "GetSessionResponse": "cognition:GetSessionResponse",
+    "status": {
+      "@id": "cognition:status",
+      "@type": "xsd:string"
+    },
+    "updated_at": {
+      "@id": "cognition:updated_at",
+      "@type": "xsd:dateTime"
+    },
+    "playbook_id": {
+      "@id": "cognition:playbook_id",
+      "@type": "xsd:string"
+    },
+    "pull_request": {
+      "@id": "cognition:pull_request"
+    },
+    "structured_output": {
+      "@id": "cognition:structured_output"
+    },
+    "status_enum": {
+      "@id": "cognition:status_enum",
+      "@type": "xsd:string"
+    },
+    "messages": {
+      "@id": "cognition:messages",
+      "@container": "@list"
+    },
+    "SendMessageRequest": "cognition:SendMessageRequest",
+    "SecretMetadata": "cognition:SecretMetadata",
+    "secret_id": {
+      "@id": "cognition:secret_id",
+      "@type": "xsd:string"
+    },
+    "secret_type": {
+      "@id": "cognition:secret_type",
+      "@type": "xsd:string"
+    },
+    "secret_name": {
+      "@id": "cognition:secret_name",
+      "@type": "xsd:string"
+    },
+    "CreateSecretRequest": "cognition:CreateSecretRequest",
+    "key": {
+      "@id": "cognition:key",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "cognition:value",
+      "@type": "xsd:string"
+    },
+    "sensitive": {
+      "@id": "cognition:sensitive",
+      "@type": "xsd:boolean"
+    },
+    "note": {
+      "@id": "cognition:note",
+      "@type": "xsd:string"
+    },
+    "EditSessionTagsRequest": "cognition:EditSessionTagsRequest",
+    "EnterpriseConsumptionResponse": "cognition:EnterpriseConsumptionResponse",
+    "sessions": {
+      "@id": "cognition:sessions",
+      "@container": "@list"
+    },
+    "cycle": {
+      "@id": "cognition:cycle",
+      "@type": "@id"
+    },
+    "ConsumptionSession": "cognition:ConsumptionSession",
+    "user_name": {
+      "@id": "cognition:user_name",
+      "@type": "xsd:string"
+    },
+    "user_email": {
+      "@id": "cognition:user_email",
+      "@type": "xsd:string"
+    },
+    "session_name": {
+      "@id": "cognition:session_name",
+      "@type": "xsd:string"
+    },
+    "acu_used": {
+      "@id": "cognition:acu_used",
+      "@type": "xsd:decimal"
+    },
+    "org_id": {
+      "@id": "cognition:org_id",
+      "@type": "xsd:string"
+    },
+    "org_name": {
+      "@id": "cognition:org_name",
+      "@type": "xsd:string"
+    },
+    "pull_requests": {
+      "@id": "cognition:pull_requests",
+      "@container": "@list"
+    },
+    "ConsumptionPullRequest": "cognition:ConsumptionPullRequest",
+    "pr_url": {
+      "@id": "cognition:pr_url",
+      "@type": "@id"
+    },
+    "pr_status": {
+      "@id": "cognition:pr_status",
+      "@type": "xsd:string"
+    },
+    "ConsumptionCycle": "cognition:ConsumptionCycle",
+    "start": {
+      "@id": "cognition:start",
+      "@type": "xsd:date"
+    },
+    "end": {
+      "@id": "cognition:end",
+      "@type": "xsd:date"
+    },
+    "ConsumptionFilterParams": "cognition:ConsumptionFilterParams",
+    "start_date": {
+      "@id": "cognition:start_date",
+      "@type": "xsd:date"
+    },
+    "end_date": {
+      "@id": "cognition:end_date",
+      "@type": "xsd:date"
+    },
+    "AuditLog": "cognition:AuditLog",
+    "audit_log_id": {
+      "@id": "cognition:audit_log_id",
+      "@type": "xsd:string"
+    },
+    "action": {
+      "@id": "cognition:action",
+      "@type": "xsd:string"
+    },
+    "KnowledgeRequest": "cognition:KnowledgeRequest",
+    "KnowledgeFolderResponse": "cognition:KnowledgeFolderResponse",
+    "CreatePlaybookRequest": "cognition:CreatePlaybookRequest",
+    "PlaybookResponse": "cognition:PlaybookResponse",
+    "access_type": {
+      "@id": "cognition:access_type",
+      "@type": "xsd:string"
+    },
+    "created_by_user_id": {
+      "@id": "cognition:created_by_user_id",
+      "@type": "xsd:string"
+    },
+    "created_by_user_name": {
+      "@id": "cognition:created_by_user_name",
+      "@type": "xsd:string"
+    },
+    "updated_by_user_id": {
+      "@id": "cognition:updated_by_user_id",
+      "@type": "xsd:string"
+    },
+    "updated_by_user_name": {
+      "@id": "cognition:updated_by_user_name",
+      "@type": "xsd:string"
+    },
+    "CreateSessionInput": "cognition:CreateSessionInput",
+    "session_secrets": {
+      "@id": "cognition:session_secrets",
+      "@container": "@list"
+    },
+    "structured_output_schema": {
+      "@id": "cognition:structured_output_schema"
+    },
+    "PlaybookInput": "cognition:PlaybookInput",
+    "SecretInput": "cognition:SecretInput",
+    "SessionSummary": "cognition:SessionSummary",
+    "requesting_user_email": {
+      "@id": "cognition:requesting_user_email",
+      "@type": "xsd:string"
+    },
+    "SessionStatusEnum": "cognition:SessionStatusEnum"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Cognition Labs API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Cognition Labs's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-04) from openapi/cognition-labs-attachments-api-openapi.yml, openapi/cognition-labs-consumption-api-openapi.yml, openapi/cognition-labs-enterprise-v3-api-openapi.yml.",
+  "dcterms:created": "2026-10-04",
+  "dcterms:source": [
+    "openapi/cognition-labs-attachments-api-openapi.yml",
+    "openapi/cognition-labs-consumption-api-openapi.yml",
+    "openapi/cognition-labs-enterprise-v3-api-openapi.yml",
+    "openapi/cognition-labs-knowledge-api-openapi.yml",
+    "openapi/cognition-labs-messages-api-openapi.yml"
+  ]
+}

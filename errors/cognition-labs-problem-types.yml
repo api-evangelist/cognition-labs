@@ -1,0 +1,71 @@
+generated: '2026-10-04'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/cognition-labs-attachments-api-openapi.yml
+- openapi/cognition-labs-consumption-api-openapi.yml
+- openapi/cognition-labs-enterprise-v3-api-openapi.yml
+- openapi/cognition-labs-knowledge-api-openapi.yml
+- openapi/cognition-labs-messages-api-openapi.yml
+- openapi/cognition-labs-openapi.yaml
+- openapi/cognition-labs-organizations-v3-api-openapi.yml
+- openapi/cognition-labs-playbooks-api-openapi.yml
+- openapi/cognition-labs-secrets-api-openapi.yml
+- openapi/cognition-labs-sessions-api-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schema: ValidationErrorBody
+coverage:
+  operations: 49
+  statuses_declared: 7
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request
+  operations: 10
+  media_types:
+  - application/json
+  schema: null
+- status: 401
+  title: Unauthorized
+  description: Unauthorized - Invalid or missing API key
+  operations: 29
+  media_types:
+  - application/json
+  schema: ValidationErrorBody
+- status: 403
+  title: Forbidden
+  description: Forbidden - User does not have permission to access the resource
+  operations: 9
+  media_types:
+  - application/json
+  schema: null
+- status: 404
+  title: Not Found
+  description: Resource not found
+  operations: 13
+  media_types:
+  - application/json
+  schema: null
+- status: 409
+  title: Conflict
+  description: Conflict - Secret name already exists
+  operations: 1
+  media_types:
+  - application/json
+  schema: null
+- status: 422
+  title: Unprocessable Content
+  description: The request payload failed validation.
+  operations: 18
+  media_types:
+  - application/json
+  schema: ValidationErrorBody
+- status: 500
+  title: Internal Server Error
+  description: Internal Server Error
+  operations: 14
+  media_types:
+  - application/json
+  schema: null

@@ -1,15 +1,17 @@
 aid: cognition-labs
+
 url: https://raw.githubusercontent.com/api-evangelist/cognition-labs/refs/heads/main/apis.yml
+
 name: Cognition Labs
+
 kind: company
-description: Cognition Labs is the applied AI lab behind Devin, the autonomous AI
-  software engineer that plans, writes, tests, and ships code inside its own shell,
-  code editor, and browser. The Devin API lets teams create and drive Devin sessions
-  programmatically - sending prompts and follow-up messages, attaching files, storing
-  organizational knowledge and reusable playbooks, injecting secrets, and tracking
-  Agent Compute Unit (ACU) consumption - across a legacy v1 surface, a v2 enterprise
-  surface, and a current v3 organizations/enterprise surface built around service-user
-  and personal access tokens.
+
+description: Cognition Labs is the applied AI lab behind Devin, the autonomous AI software engineer that plans, writes, tests, and ships code
+  inside its own shell, code editor, and browser. The Devin API lets teams create and drive Devin sessions programmatically - sending prompts
+  and follow-up messages, attaching files, storing organizational knowledge and reusable playbooks, injecting secrets, and tracking Agent Compute
+  Unit (ACU) consumption - across a legacy v1 surface, a v2 enterprise surface, and a current v3 organizations/enterprise surface built around
+  service-user and personal access tokens.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -22,6 +24,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -36,11 +39,17 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cognition-labs.png
+
 x-docs-platform: mintlify
+
 x-docs-platform-confidence: medium
+
 x-docs-platform-checked: 2026-09-24
+
 x-docs-hosting: vercel
+
 tags:
 - Artificial Intelligence
 - AI Agents
@@ -48,6 +57,7 @@ tags:
 - Software Engineering
 - LLM
 - Devin
+
 tags_raw:
 - AI
 - AI Agent
@@ -55,9 +65,83 @@ tags_raw:
 - Software Engineering
 - LLM
 - Devin
+
 created: '2026-07-02'
+
 modified: '2026-07-02'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: Spectral
+  url: rules/cognition-labs-rules.yml
+- type: JSONLD
+  url: json-ld/cognition-labs-context.jsonld
+- type: Vocabulary
+  url: vocabulary/cognition-labs-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/cognition-labs-data-model.yml
+- type: CLI
+  url: cli/cognition-labs-cli.yml
+- type: ChangeLog
+  url: changelog/cognition-labs-changelog.yml
+- type: Compliance
+  url: https://trust.cognition.ai/
+- type: ErrorCatalog
+  url: errors/cognition-labs-problem-types.yml
+- type: Conformance
+  url: conformance/cognition-labs-conformance.yml
+- type: LLMsTxt
+  url: llms/cognition-labs-llms.txt
+- type: AgentCard
+  url: a2a/cognition-labs-a2a.yml
+- type: WellKnown
+  url: well-known/cognition-labs-well-known.yml
+- type: Hosts
+  url: hosts/cognition-labs-hosts.yml
+- type: Vendors
+  url: vendors/cognition-labs-vendors.yml
+- type: Security
+  url: https://cognition.com/legal/security
+- type: PrivacyPolicy
+  url: https://cognition.com/legal/privacy-policy
+- type: GettingStarted
+  url: https://docs.devin.ai/tutorial-library/repo-setup
+- type: APIReference
+  url: https://docs.devin.ai/llms.txt
+- type: AgenticAccess
+  url: agentic-access/cognition-labs-agentic-access.yml
+- type: TrustCenter
+  url: security/cognition-labs-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/cognition-labs-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/cognition-labs-domain-security.yml
+- type: Authentication
+  url: authentication/cognition-labs-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/CognitionAI
+- type: LinkedIn
+  url: https://www.linkedin.com/company/cognition-ai-labs
+- type: Website
+  url: https://cognition.ai/
+- type: Documentation
+  url: https://docs.devin.ai
+- type: Plans
+  url: plans/cognition-labs-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/cognition-labs-rate-limits.yml
+- type: FinOps
+  url: finops/cognition-labs-finops.yml
+- url: https://cognition.com/blog
+  type: Blog
+
 apis:
 - aid: cognition-labs:cognition-labs-attachments-api
   name: Cognition Labs Attachments API
@@ -295,6 +379,12 @@ apis:
     url: https://docs.devin.ai/admin/billing/enterprise
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/consumption/consumption-daily
+  - type: JSONSchema
+    url: json-schema/cognition-labs-knowledge-input-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-knowledge-entry-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-knowledge-folder-schema.json
 - aid: cognition-labs:cognition-labs-messages-api
   name: Cognition Labs Messages API
   description: Send and read messages within a running session.
@@ -415,6 +505,10 @@ apis:
     url: https://docs.devin.ai/admin/billing/enterprise
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/consumption/consumption-daily
+  - type: JSONSchema
+    url: json-schema/cognition-labs-create-session-input-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-create-session-response-schema.json
 - aid: cognition-labs:cognition-labs-playbooks-api
   name: Cognition Labs Playbooks API
   description: Reusable team playbooks that seed new sessions.
@@ -474,6 +568,10 @@ apis:
     url: https://docs.devin.ai/admin/billing/enterprise
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/consumption/consumption-daily
+  - type: JSONSchema
+    url: json-schema/cognition-labs-playbook-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-playbook-input-schema.json
 - aid: cognition-labs:cognition-labs-secrets-api
   name: Cognition Labs Secrets API
   description: Encrypted credentials Devin can use inside sessions.
@@ -533,6 +631,10 @@ apis:
     url: https://docs.devin.ai/admin/billing/enterprise
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/consumption/consumption-daily
+  - type: JSONSchema
+    url: json-schema/cognition-labs-secret-input-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-secret-metadata-schema.json
 - aid: cognition-labs:cognition-labs-sessions-api
   name: Cognition Labs Sessions API
   description: Create and manage Devin sessions (v1 legacy surface).
@@ -592,35 +694,40 @@ apis:
     url: https://docs.devin.ai/admin/billing/enterprise
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/consumption/consumption-daily
-common:
-- type: AgenticAccess
-  url: agentic-access/cognition-labs-agentic-access.yml
-- type: TrustCenter
-  url: security/cognition-labs-trust-center.yml
-- type: VulnerabilityDisclosure
-  url: security/cognition-labs-vulnerability-disclosure.yml
-- type: DomainSecurity
-  url: security/cognition-labs-domain-security.yml
-- type: Authentication
-  url: authentication/cognition-labs-authentication.yml
-- type: GitHubOrganization
-  url: https://github.com/CognitionAI
-- type: LinkedIn
-  url: https://www.linkedin.com/company/cognition-ai-labs
-- type: Website
-  url: https://cognition.ai/
-- type: Documentation
-  url: https://docs.devin.ai
-- type: Plans
-  url: plans/cognition-labs-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/cognition-labs-rate-limits.yml
-- type: FinOps
-  url: finops/cognition-labs-finops.yml
-- url: https://cognition.com/blog
-  type: Blog
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - type: JSONSchema
+    url: json-schema/cognition-labs-create-session-input-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-session-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-session-detail-schema.json
+  - type: JSONSchema
+    url: json-schema/cognition-labs-create-session-response-schema.json
+- aid: cognition-labs:cognition-labs-enterprise-api
+  name: Cognition Labs Enterprise API
+  description: Operations for enterprise-specific features and reporting
+  humanURL: https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session
+  baseURL: https://api.devin.ai/v1
+  tags:
+  - Enterprise
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-labs-enterprise-api-openapi.yml
+- aid: cognition-labs:cognition-labs-audit-logs-api
+  name: Cognition Labs Audit Logs API
+  description: Operations for managing audit logs
+  humanURL: https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session
+  baseURL: https://api.devin.ai/v1
+  tags:
+  - Audit Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/cognition-labs-audit-logs-api-openapi.yml
 x-parent: cognition
+
 x-relationship: product
+x-enrichment:
+  date: '2026-10-04'
+  status: enriched
+  artifacts_added: 40
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

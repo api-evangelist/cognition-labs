@@ -1,0 +1,34 @@
+generated: '2026-10-04'
+method: generated
+generator: extract-docs-artifacts.py skills (local)
+source: openapi/cognition-labs-sessions-api-openapi.yml
+skills:
+- file: skills/cognition-labs-create-use-terminate-session.md
+  name: cognition-labs-create-use-terminate-session
+  api: openapi/cognition-labs-sessions-api-openapi.yml
+  operations:
+  - createSession
+  - listSessions
+  - getSession
+  - terminateSession
+- file: skills/cognition-labs-manage-playbooks.md
+  name: cognition-labs-manage-playbooks
+  api: openapi/cognition-labs-playbooks-api-openapi.yml
+  operations:
+  - createPlaybook
+  - getPlaybook
+  - listPlaybooks
+- file: skills/cognition-labs-upload-download-attachment.md
+  name: cognition-labs-upload-download-attachment
+  api: openapi/cognition-labs-attachments-api-openapi.yml
+  operations:
+  - uploadAttachment
+  - downloadAttachment
+- file: skills/cognition-labs-manage-knowledge.md
+  name: cognition-labs-manage-knowledge
+  api: openapi/cognition-labs-knowledge-api-openapi.yml
+  operations:
+  - listKnowledge
+  - createKnowledge
+  - updateKnowledge
+  - deleteKnowledge

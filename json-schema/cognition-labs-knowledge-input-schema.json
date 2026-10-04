@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cognition-labs/main/json-schema/cognition-labs-knowledge-input-schema.json",
+  "title": "KnowledgeInput",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cognition-labs-knowledge-api-openapi.yml#/components/schemas/KnowledgeInput",
+  "type": "object",
+  "required": [
+    "name",
+    "body",
+    "trigger_description"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "trigger_description": {
+      "type": "string",
+      "description": "Describes when this knowledge entry should apply."
+    },
+    "macro": {
+      "type": "string"
+    },
+    "parent_folder_id": {
+      "type": "string"
+    },
+    "pinned_repo": {
+      "type": "string"
+    }
+  }
+}

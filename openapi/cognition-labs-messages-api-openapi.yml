@@ -72,13 +72,6 @@ components:
                 type: string
               type:
                 type: string
-  responses:
-    ValidationError:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ValidationErrorBody'
   parameters:
     SessionId:
       name: session_id
@@ -87,6 +80,13 @@ components:
       description: The unique identifier of the session.
       schema:
         type: string
+  responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ValidationErrorBody'
   securitySchemes:
     bearerAuth:
       type: http

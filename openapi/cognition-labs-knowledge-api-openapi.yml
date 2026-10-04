@@ -1,19 +1,15 @@
 openapi: 3.2.0
 info:
-  title: Devin API (Cognition Labs) Knowledge API
-  description: The Devin API lets you create and drive Devin, Cognition's autonomous AI software engineer, programmatically.
+  title: Cognition Labs Knowledge API
   version: '1.0'
-  contact:
-    name: Cognition
-    url: https://cognition.ai
-  license:
-    name: Proprietary
-    url: https://docs.devin.ai/admin/security
+  description: 'Operations tagged Knowledge across 2 of this provider''s published API definitions: cognition-labs-openapi.yml, cognition-labs-openapi.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.devin.ai/v1
   description: Legacy v1 API (apk_user_*/apk_* keys)
 - url: https://api.devin.ai/v3
   description: Current v3 organizations/enterprise API (cog_ keys)
+- url: https://api.devin.ai
+  description: Devin Production Server
 security:
 - bearerAuth: []
 tags:
@@ -62,6 +58,11 @@ paths:
                 $ref: '#/components/schemas/KnowledgeEntry'
         '422':
           $ref: '#/components/responses/ValidationError'
+    servers:
+    - url: https://api.devin.ai/v1
+      description: Legacy v1 API (apk_user_*/apk_* keys)
+    - url: https://api.devin.ai/v3
+      description: Current v3 organizations/enterprise API (cog_ keys)
   /knowledge/{knowledge_id}:
     parameters:
     - name: knowledge_id
@@ -106,8 +107,184 @@ paths:
                     type: string
         '422':
           $ref: '#/components/responses/ValidationError'
+    servers:
+    - url: https://api.devin.ai/v1
+      description: Legacy v1 API (apk_user_*/apk_* keys)
+    - url: https://api.devin.ai/v3
+      description: Current v3 organizations/enterprise API (cog_ keys)
+  /v1/knowledge:
+    get:
+      tags:
+      - Knowledge
+      summary: List knowledge
+      description: Gets all knowledge and folders in your current organization. This endpoint will not return system knowledge (repo indexes or built-in knowledge) managed by Cognition.
+      responses:
+        '200':
+          description: List of all knowledge and folders
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  knowledge:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeResponse'
+                  folders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KnowledgeFolderResponse'
+                required:
+                - knowledge
+                - folders
+              examples:
+                list-knowledge-response:
+                  summary: Example response listing knowledge and folders
+                  value:
+                    knowledge:
+                    - $ref: '#/components/examples/knowledge-response/value'
+                    folders:
+                    - id: folder-xxx
+                      name: Fetching data
+                      description: Knowledge related to what websites or APIs Devin should use to complete certain tasks
+                      created_at: '2024-01-01T00:00:00Z'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+      operationId: getV1Knowledge
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Knowledge
+      summary: Create knowledge
+      description: Create a new piece of knowledge.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeRequest'
+      responses:
+        '200':
+          description: Knowledge created. Returns the newly created knowledge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeResponse'
+              examples:
+                create-knowledge-response:
+                  summary: Example response for creating a knowledge
+                  value:
+                    $ref: '#/components/examples/knowledge-response/value'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+      operationId: postV1Knowledge
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.devin.ai
+      description: Devin Production Server
+  /v1/knowledge/{note_id}:
+    delete:
+      tags:
+      - Knowledge
+      summary: Delete knowledge
+      description: Permanently delete a piece of knowledge by its ID. This action cannot be undone.
+      parameters:
+      - name: note_id
+        in: path
+        required: true
+        description: The ID of the knowledge to delete
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Knowledge successfully deleted
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      operationId: deleteV1KnowledgeByNoteId
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Knowledge
+      summary: Update knowledge
+      description: Update the name, body, or trigger of a piece of knowledge.
+      parameters:
+      - name: note_id
+        in: path
+        required: true
+        description: The ID of the knowledge to update
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KnowledgeRequest'
+        required: true
+      responses:
+        '200':
+          description: Knowledge successfully updated. Returns the updated knowledge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KnowledgeResponse'
+              examples:
+                update-knowledge-response:
+                  summary: Example response for updating a knowledge
+                  value:
+                    $ref: '#/components/examples/knowledge-response/value'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/ForbiddenError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+      operationId: putV1KnowledgeByNoteId
+      x-operation-id-source: derived
+    servers:
+    - url: https://api.devin.ai
+      description: Devin Production Server
 components:
   schemas:
+    ValidationErrorBody:
+      type: object
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
+            properties:
+              loc:
+                type: array
+                items:
+                  type: string
+              msg:
+                type: string
+              type:
+                type: string
+    KnowledgeInput:
+      type: object
+      required:
+      - name
+      - body
+      - trigger_description
+      properties:
+        name:
+          type: string
+        body:
+          type: string
+        trigger_description:
+          type: string
+          description: Describes when this knowledge entry should apply.
+        macro:
+          type: string
+        parent_folder_id:
+          type: string
+        pinned_repo:
+          type: string
     KnowledgeEntry:
       allOf:
       - $ref: '#/components/schemas/KnowledgeInput'
@@ -131,22 +308,6 @@ components:
                 type:
                 - string
                 - 'null'
-    ValidationErrorBody:
-      type: object
-      properties:
-        detail:
-          type: array
-          items:
-            type: object
-            properties:
-              loc:
-                type: array
-                items:
-                  type: string
-              msg:
-                type: string
-              type:
-                type: string
     KnowledgeFolder:
       type: object
       properties:
@@ -159,26 +320,65 @@ components:
         created_at:
           type: string
           format: date-time
-    KnowledgeInput:
+    KnowledgeFolderResponse:
       type: object
+      description: Information about a knowledge folder
+      properties:
+        id:
+          type: string
+          description: The id of the folder
+        name:
+          type: string
+          description: The name of the folder
+        description:
+          type: string
+          description: The description of the folder, assists the auto-organization of knowledge
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp (ISO 8601)
+    KnowledgeRequest:
+      type: object
+      description: Information about a piece of knowledge
+      properties:
+        body:
+          type: string
+          description: The content of the knowledge. Devin will read this when the knowledge gets triggered
+        name:
+          title: Name
+          description: The name of the knowledge, used only for displaying the knowledge on the knowledge page
+        parent_folder_id:
+          type: string
+          nullabe: true
+          description: The id of the folder that this knowledge is located in. Null if the knowledge is not located in any folder
+        trigger_description:
+          type: string
+          description: The description of when this knowledge should be used by Devin
+        pinned_repo:
+          type: string
+          nullable: true
+          description: "Pin knowledge to specific repositories. Valid values:\n- null: No pinning (default)\n- \"all\": Pin to all repositories  \n- \"owner/repo\": Pin to specific repository\n"
+          example: all
       required:
       - name
       - body
       - trigger_description
-      properties:
-        name:
-          type: string
-        body:
-          type: string
-        trigger_description:
-          type: string
-          description: Describes when this knowledge entry should apply.
-        macro:
-          type: string
-        parent_folder_id:
-          type: string
-        pinned_repo:
-          type: string
+    KnowledgeResponse:
+      description: Information about a piece of knowledge
+      allOf:
+      - $ref: '#/components/schemas/KnowledgeRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: The id of the knowledge
+          created_at:
+            type: string
+            format: date-time
+            description: Creation timestamp (ISO 8601)
+        required:
+        - id
+        - created_at
   responses:
     ValidationError:
       description: The request payload failed validation.
@@ -186,8 +386,53 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ValidationErrorBody'
+    UnauthorizedError:
+      description: Unauthorized - Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Missing or invalid Authorization header
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: The requested resource does not exist
+    ForbiddenError:
+      description: Forbidden - User does not have permission to access the resource
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: You do not have permission to access this resource
+  examples:
+    knowledge-response:
+      value:
+        id: note-xxx
+        name: Getting the weather
+        body: Navigate to weather.com
+        trigger_description: When the user asks about the weather
+        parent_folder_id: folder-xxx
+        created_at: '2024-01-01T00:00:00Z'
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: 'v1/v2 keys are prefixed apk_user_* (personal) or apk_* (service). The current v3 API uses service-user or personal access tokens prefixed cog_. Passed as `Authorization: Bearer YOUR_API_KEY`.'
+externalDocs:
+  description: Visit Devin's documentation page for more info
+  url: https://docs.devin.ai
+x-refined-from:
+- cognition-labs-openapi.yml
+- cognition-labs-openapi.yaml

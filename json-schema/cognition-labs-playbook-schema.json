@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cognition-labs/main/json-schema/cognition-labs-playbook-schema.json",
+  "title": "Playbook",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cognition-labs-playbooks-api-openapi.yml#/components/schemas/Playbook",
+  "allOf": [
+    {
+      "$ref": "#/$defs/PlaybookInput"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "playbook_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "created_by_user_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_by_user_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "PlaybookInput": {
+      "type": "object",
+      "required": [
+        "title",
+        "body"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "macro": {
+          "type": "string"
+        },
+        "access_type": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

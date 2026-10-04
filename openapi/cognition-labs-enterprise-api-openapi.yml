@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  title: Devin External Enterprise API
+  version: 1.0.0
+  description: 'The Devin External API enables you to programmatically create and interact with Devin sessions. This RESTful API allows you to integrate Devin into your own applications, automate workflows, and build powerful tools on top of Devin.
+
+    **Note**: The External API is currently in alpha. While we strive to maintain backward compatibility, some endpoints may change as we improve the API.'
+servers:
+- url: https://api.devin.ai
+  description: Devin Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Enterprise
+  description: Operations for enterprise-specific features and reporting
+paths:
+  /enterprise/consumption:
+    get:
+      tags:
+      - Enterprise
+      summary: Get enterprise consumption data
+      description: 'Retrieve detailed consumption data for an enterprise organization.
+
+        Data is filtered by start and end dates in ISO format.'
+      parameters:
+      - name: start_date
+        in: query
+        required: true
+        description: Start date in ISO format (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      - name: end_date
+        in: query
+        required: true
+        description: End date in ISO format (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Enterprise consumption data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnterpriseConsumptionResponse'
+        '400':
+          description: Bad Request - Invalid date format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Invalid date format. Dates must be in ISO format (YYYY-MM-DD)
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Forbidden - Consumption API not enabled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: Contact support to enable the consumption API
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+      operationId: getEnterpriseConsumption
+      x-operation-id-source: derived
+components:
+  schemas:
+    ConsumptionPullRequest:
+      type: object
+      properties:
+        pr_url:
+          type: string
+          format: uri
+          description: URL of the pull request
+          example: https://github.com/example/repo/pull/6
+        pr_status:
+          type: string
+          description: Status of the pull request
+          enum:
+          - open
+          - closed
+          - merged
+          example: open
+      required:
+      - pr_url
+      - pr_status
+      description: Pull request information
+    EnterpriseConsumptionResponse:
+      type: object
+      properties:
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumptionSession'
+          description: List of sessions with consumption data
+        cycle:
+          $ref: '#/components/schemas/ConsumptionCycle'
+          description: Billing cycle information
+      required:
+      - sessions
+      - cycle
+      description: Enterprise consumption data response
+    ConsumptionSession:
+      type: object
+      properties:
+        user_name:
+          type: string
+          description: Name of the user who created the session
+          example: John Doe
+        user_email:
+          type: string
+          format: email
+          description: Email address of the user
+          example: john.doe@example.com
+        session_name:
+          type: string
+          description: Name/title of the session
+          example: Create portfolio website
+        created_at:
+          type: string
+          format: date-time
+          description: Session creation timestamp in ISO format
+          example: '2024-11-15T14:32:18.456789+00:00'
+        acu_used:
+          type: number
+          format: float
+          description: Amount of ACUs (Agent Compute Units) consumed
+          example: 2.4567891234567893
+        url:
+          type: string
+          format: uri
+          description: URL to view the session
+          example: https://app.devin.ai/sessions/f8e9d7c6b5a4321098765432109876543
+        org_id:
+          type: string
+          description: Organization identifier
+          example: org-a1b2c3d4e5f6789012345678901234567
+        org_name:
+          type: string
+          description: Organization name
+          example: Example Organization
+        pull_requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumptionPullRequest'
+          description: List of pull requests created during the session
+      required:
+      - user_name
+      - user_email
+      - session_name
+      - created_at
+      - acu_used
+      - url
+      - org_id
+      - org_name
+      - pull_requests
+      description: Session consumption data
+    ConsumptionCycle:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date of the billing cycle
+          example: '2025-07-01'
+        end:
+          type: string
+          format: date
+          description: End date of the billing cycle
+          example: '2025-07-31'
+      required:
+      - start
+      - end
+      description: Billing cycle information
+  responses:
+    UnauthorizedError:
+      description: Unauthorized - Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Missing or invalid Authorization header
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Something went wrong
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: The requested resource does not exist
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Visit Devin's documentation page for more info
+  url: https://docs.devin.ai

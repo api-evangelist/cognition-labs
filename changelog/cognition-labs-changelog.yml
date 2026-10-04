@@ -1,0 +1,69 @@
+generated: '2026-10-04'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.devin.ai/release-notes/overview.md
+sources:
+- https://docs.devin.ai/release-notes/overview.md
+- https://docs.devin.ai/release-notes/2026.md
+- https://docs.devin.ai/release-notes/2025.md
+- https://docs.devin.ai/release-notes/2024.md
+entries:
+- breaking: false
+  highlights:
+  - Code blocks and terminals in the app now render in Devin Mono, a new monospace typeface designed to pair with the app's UI font.
+  - The streaming terminal preview in the worklog is now a read‑only text view.
+  - Messages sent to Devin right before the connection drops are now saved by the server instead of being lost.
+  - Hovering a session in the sidebar opens a preview card showing the session's title, status, and latest response.
+  date: '2026-09-30'
+- breaking: false
+  highlights:
+  - The sessions sidebar's "Group by status" now uses Working / Ready / Blocked / Inactive.
+  - Search mode, changed‑files tree layout, sidebar filters and wiki language choices now sync across browsers and devices.
+  - Option+J / Option+K (Alt+J / Alt+K) move to the next or previous session in the sidebar.
+  - Session search in the command palette now matches sub‑sessions on their own title.
+  date: '2026-09-25'
+- breaking: false
+  highlights:
+  - All enterprise customers have now been upgraded to the newest version of Devin, and the legacy "Agent (old)" option has been removed.
+  - New API v3 endpoints for tracking usage metrics and active users across your enterprise.
+  - Added a search filter to the Jira project mapping modal.
+  - Batch sessions now appear visually indented under their parent session in the sidebar.
+  date: '2025-12-19'
+- breaking: false
+  highlights:
+  - Organizations can now create and manage custom slash commands that expand into predefined text prompts.
+  - Users can now interact with Devin directly in Microsoft Teams channels by mentioning @Devin.
+  - New v3 API endpoints for advanced sessions, organization searches, and improved audit logs.
+  - The service users page now displays the creation date for each service user.
+  date: '2025-12-12'
+- breaking: false
+  highlights:
+  - Dana, a version of Devin optimized for data analysis tasks, is now available for all users.
+  - New v3 beta endpoints and improvements for service users.
+  - Unified role filter combining enterprise and organization roles into a single grouped dropdown on the service users page.
+  - Azure DevOps webhook support for automated PR comments and status updates.
+  date: '2025-12-05'
+- breaking: false
+  highlights:
+  - The Enterprise API v3 Git Permissions bulk create endpoint now accepts up to 200 permissions per request.
+  - Duplicate and overlap detection added to bulk permission requests.
+  - The maximum pagination limit for Enterprise API v2 query parameters has been reduced from 1000 to 200.
+  - Advanced Mode released under the "Advanced Features" section.
+  date: '2025-11-27'
+- breaking: false
+  highlights:
+  - Devin is now generally available with subscriptions starting at $500/month.
+  - Devin is now ~10% faster and ~10% more cost‑efficient.
+  - Fixes for crashing, stuck, and hanging Devins have been deployed.
+  - More options to customize Devin, including default sidebar filters.
+  date: '2024-12-24'
+- breaking: false
+  highlights:
+  - Tag @Devin on bug reports and feature requests directly on Slack.
+  - Devin now automatically wakes to address PR comments and lint errors.
+  - Use Devin as your todo list with an archive button next to the session title.
+  - Configure Devin's behaviors, including the new Agency setting.
+  date: '2024-11-22'
+current_version: '2026-09-30'
+note: Versioning scheme is date‑based (YYYY‑MM‑DD) as used in the release‑notes.
+docs: https://docs.devin.ai/release-notes/overview.md

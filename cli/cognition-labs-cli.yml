@@ -1,0 +1,30 @@
+generated: '2026-10-04'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.devin.ai/cloud/outposts/reference.md
+sources:
+- https://docs.devin.ai/cloud/outposts/reference.md
+- https://docs.devin.ai/work-with-devin/devin-session-tools.md
+- https://docs.devin.ai/work-with-devin/devin-cli.md
+- https://docs.devin.ai/cli/index.md
+install:
+- method: curl script (macOS / Linux / WSL)
+  command: curl -fsSL https://cli.devin.ai/install.sh | bash
+- method: Homebrew (macOS)
+  command: brew install --cask devin-cli
+- method: Homebrew upgrade (macOS)
+  command: brew upgrade --cask devin-cli
+- method: Windows installer (x86_64)
+  command: https://static.devin.ai/cli/devin-updater-x86_64-pc-windows.exe
+- method: Windows installer (ARM64)
+  command: https://static.devin.ai/cli/devin-updater-aarch64-pc-windows.exe
+- method: PowerShell installer (Windows)
+  command: irm https://static.devin.ai/cli/setup.ps1 | iex
+commands:
+- group: worker
+  commands:
+  - devin worker start
+  - devin worker outpost create
+  - devin worker outpost delete
+binary: devin
+docs: https://docs.devin.ai/cloud/outposts/reference.md

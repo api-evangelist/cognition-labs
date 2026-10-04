@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cognition-labs/main/json-schema/cognition-labs-create-session-input-schema.json",
+  "title": "CreateSessionInput",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cognition-labs-organizations-v3-api-openapi.yml#/components/schemas/CreateSessionInput",
+  "type": "object",
+  "required": [
+    "prompt"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "The task prompt for Devin to work on."
+    },
+    "title": {
+      "type": "string",
+      "description": "Custom session name; auto-generated if omitted."
+    },
+    "snapshot_id": {
+      "type": "string"
+    },
+    "playbook_id": {
+      "type": "string"
+    },
+    "knowledge_ids": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Null uses all knowledge; empty array uses none."
+    },
+    "secret_ids": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      },
+      "description": "Null uses all secrets; empty array uses none."
+    },
+    "session_secrets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "sensitive": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "structured_output_schema": {
+      "type": "object",
+      "description": "JSON Schema (Draft 7) for validating structured output. Max 64KB.",
+      "additionalProperties": true
+    },
+    "tags": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "string"
+      }
+    },
+    "max_acu_limit": {
+      "type": "integer",
+      "description": "Maximum ACU allowance for the session."
+    },
+    "idempotent": {
+      "type": "boolean",
+      "default": false
+    },
+    "unlisted": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

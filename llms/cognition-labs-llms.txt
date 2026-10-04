@@ -1,0 +1,26 @@
+# Cognition
+
+> Cognition is an applied AI lab that builds Devin, the first autonomous software engineer. Devin plans, writes, tests, and ships production code, working inside your existing workflows and tools. Cognition also builds Devin for Terminal (CLI), Devin Desktop (formerly Windsurf), and publishes research on AI coding agents.
+
+Cognition's products help engineering teams delegate real software engineering work — bug fixes, feature development, refactors, code migrations, security remediation, and code review — to autonomous agents.
+
+## Main pages
+
+- [Home](https://cognition.com/): Overview of Cognition and Devin, the autonomous software engineer
+- [About](https://cognition.com/about): Cognition's mission and team
+- [Blog](https://cognition.com/blog): Announcements, research, and engineering deep dives
+- [Research](https://cognition.com/research): Research on autonomous coding agents and model evaluation
+- [FrontierCode](https://cognition.com/frontiercode): Cognition's AI coding benchmark and leaderboard
+- [Careers](https://cognition.com/careers): Open roles at Cognition
+- [Contact](https://cognition.com/contact): Talk to the Cognition sales team
+
+## Documentation
+
+- [Devin Docs](https://docs.devin.ai): Product documentation for Devin, the Devin API, and integrations
+- [Devin App](https://app.devin.ai): The Devin web application
+
+## Legal
+
+- [Privacy Policy](https://cognition.com/legal/privacy-policy)
+- [Terms of Service](https://cognition.com/legal/platform-terms-of-service)
+- [Security](https://cognition.com/legal/security)

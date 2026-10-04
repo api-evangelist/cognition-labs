@@ -1,0 +1,184 @@
+openapi: 3.2.0
+info:
+  title: Devin External Audit Logs API
+  version: 1.0.0
+  description: 'The Devin External API enables you to programmatically create and interact with Devin sessions. This RESTful API allows you to integrate Devin into your own applications, automate workflows, and build powerful tools on top of Devin.
+
+    **Note**: The External API is currently in alpha. While we strive to maintain backward compatibility, some endpoints may change as we improve the API.'
+servers:
+- url: https://api.devin.ai
+  description: Devin Production Server
+security:
+- bearerAuth: []
+tags:
+- name: Audit Logs
+  description: Operations for managing audit logs
+paths:
+  /v1/audit-logs:
+    get:
+      tags:
+      - Audit Logs
+      summary: List all audit logs
+      description: 'Get a paginated list of all audit logs for the current organization.
+
+        The logs are ordered by creation date in descending order (newest first).
+
+
+        Audit logs track various actions across organization management, sessions, API keys,
+
+        secrets, knowledge management, playbooks, repository management, git integrations,
+
+        enterprise settings, and search operations.'
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        description: Maximum number of audit logs to return
+        schema:
+          type: integer
+          default: 100
+          minimum: 1
+      - name: before
+        in: query
+        required: false
+        description: Filter logs before a specific timestamp
+        schema:
+          type: string
+      - name: after
+        in: query
+        required: false
+        description: Filter logs after a specific timestamp
+        schema:
+          type: string
+      responses:
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '200':
+          description: List of audit logs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audit_logs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditLog'
+                required:
+                - audit_logs
+              examples:
+                list-audit-logs-response:
+                  summary: Example response listing audit logs
+                  value:
+                    audit_logs:
+                    - created_at: 1704067200000
+                      action: create_session
+                      user_id: email|abcd
+                      session_id: session_789
+                    - created_at: 1704153600000
+                      action: add_members_to_org
+                      target_user_id: email|efgh
+                      org_id: org_123
+                    - created_at: 1704240000000
+                      action: create_github_integration
+                      integration_id: github_456
+                    - created_at: 1704326400000
+                      action: update_enterprise_settings
+                      setting_type: hypervisor
+      operationId: getV1AuditLogs
+      x-operation-id-source: derived
+components:
+  responses:
+    UnauthorizedError:
+      description: Unauthorized - Invalid or missing API key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Missing or invalid Authorization header
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Something went wrong
+  schemas:
+    AuditLog:
+      type: object
+      description: Audit log entry
+      properties:
+        audit_log_id:
+          type: string
+          description: 'Unique identifier for the audit log entry (format: audit_log-{uuid_without_hyphens})'
+          example: audit_log-1234567890abcdef1234567890abcdef
+        created_at:
+          type: integer
+          description: Creation timestamp (Unix timestamp in milliseconds)
+        action:
+          type: string
+          description: The action that was performed
+          enum:
+          - add_member
+          - add_members_to_enterprise
+          - add_members_to_org
+          - add_members_to_primary_org
+          - assign_roles
+          - create_azure_devops_integration
+          - create_folder
+          - create_github_integration
+          - create_gitlab_integration
+          - create_knowledge
+          - create_linear_integration
+          - create_org
+          - create_org_api_key
+          - create_org_group
+          - create_playbook
+          - create_secret
+          - create_session
+          - create_user_api_key
+          - delete_azure_devops_integration
+          - delete_folder
+          - delete_github_integration
+          - delete_gitlab_integration
+          - delete_knowledge
+          - delete_member
+          - delete_org
+          - delete_org_group
+          - delete_playbook
+          - delete_repo_setup
+          - delete_secret
+          - edit_knowledge
+          - finish_repo_setup
+          - github_integration_deleted
+          - remove_members_from_org
+          - remove_repo_from_devin
+          - search_query
+          - send_message
+          - sleep_session
+          - start_repo_setup
+          - terminate_session
+          - update_enterprise_hypervisor_settings
+          - update_enterprise_settings
+          - update_folder
+          - update_org_group
+          - update_playbook
+          - update_secret
+          - view_org_api_key
+          - view_user_api_key
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+externalDocs:
+  description: Visit Devin's documentation page for more info
+  url: https://docs.devin.ai

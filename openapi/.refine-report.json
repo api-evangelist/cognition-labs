@@ -1,7 +1,8 @@
 {
   "provider": "cognition-labs",
   "sources": [
-    "_original/cognition-labs-openapi.yml"
+    "_original/cognition-labs-openapi.yml",
+    "cognition-labs-openapi.yaml"
   ],
   "outputs": [
     "cognition-labs-attachments-api-openapi.yml",
@@ -12,15 +13,25 @@
     "cognition-labs-organizations-v3-api-openapi.yml",
     "cognition-labs-playbooks-api-openapi.yml",
     "cognition-labs-secrets-api-openapi.yml",
-    "cognition-labs-sessions-api-openapi.yml"
+    "cognition-labs-sessions-api-openapi.yml",
+    "cognition-labs-auditlogs-api-openapi.yml",
+    "cognition-labs-enterprise-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "archived openapi/cognition-labs-openapi.yaml"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "cognition-labs-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "cognition-labs-openapi.yaml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Attachments' spans 2 source specs (cognition-labs-openapi.yml, cognition-labs-openapi.yaml): per-path servers applied",
+    "tag 'Knowledge' spans 2 source specs (cognition-labs-openapi.yml, cognition-labs-openapi.yaml): per-path servers applied",
+    "tag 'Playbooks' spans 2 source specs (cognition-labs-openapi.yml, cognition-labs-openapi.yaml): per-path servers applied",
+    "tag 'Secrets' spans 2 source specs (cognition-labs-openapi.yml, cognition-labs-openapi.yaml): per-path servers applied",
+    "tag 'Sessions' spans 2 source specs (cognition-labs-openapi.yml, cognition-labs-openapi.yaml): per-path servers applied",
+    "apis.yml register: written (+2 apis, 11 total)"
   ],
   "skipped": [
     "cognition-labs-attachments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
