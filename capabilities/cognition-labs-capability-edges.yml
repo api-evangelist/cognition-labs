@@ -1,0 +1,38 @@
+slug: cognition-labs
+provider: Cognition Labs
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Secrets
+  spec_file: cognition-labs-secrets-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.7
+  evidence: 'operations "List all secrets", "Create a secret", "Delete a secret"; schema SecretMetadata,
+    SecretInput; vendor: "injecting secrets"'
+  reason: The surface stores and injects secret values consumed at runtime by Devin's execution environment,
+    which is squarely Configuration & Secrets Management. Confidence held at 0.7 because the secrets serve
+    an agent workspace rather than a product service fleet.
+- tag: Sessions
+  spec_file: cognition-labs-sessions-api-openapi.yml
+  capability_id: BC-4200.40
+  capability_id_l1: BC-4200
+  capability_name: Software Construction Management
+  confidence: 0.7
+  evidence: 'operations "Create a new Devin session", "Terminate a session"; vendor: "Devin, the autonomous
+    AI software engineer that plans, writes, tests, and ships code inside its own shell, code editor,
+    and browser"'
+  reason: Sessions are the unit of work in which code is actually written and shipped, so the API realises
+    software construction (implementation practice). Some ambiguity remains because the operations are
+    generic session CRUD with no code-specific schemas.

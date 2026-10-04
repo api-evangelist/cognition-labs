@@ -6,11 +6,11 @@ name: Cognition Labs
 
 kind: company
 
-description: Cognition Labs is the applied AI lab behind Devin, the autonomous AI software engineer that plans, writes, tests, and ships code
-  inside its own shell, code editor, and browser. The Devin API lets teams create and drive Devin sessions programmatically - sending prompts
-  and follow-up messages, attaching files, storing organizational knowledge and reusable playbooks, injecting secrets, and tracking Agent Compute
-  Unit (ACU) consumption - across a legacy v1 surface, a v2 enterprise surface, and a current v3 organizations/enterprise surface built around
-  service-user and personal access tokens.
+description: Cognition Labs is the applied AI lab behind Devin, the autonomous AI software engineer that plans, writes, tests, and ships code inside
+  its own shell, code editor, and browser. The Devin API lets teams create and drive Devin sessions programmatically - sending prompts and follow-up
+  messages, attaching files, storing organizational knowledge and reusable playbooks, injecting secrets, and tracking Agent Compute Unit (ACU)
+  consumption - across a legacy v1 surface, a v2 enterprise surface, and a current v3 organizations/enterprise surface built around service-user
+  and personal access tokens.
 
 deliveryModel:
   model: saas
@@ -141,6 +141,9 @@ common:
   url: finops/cognition-labs-finops.yml
 - url: https://cognition.com/blog
   type: Blog
+- type: CapabilityMap
+  url: capabilities/cognition-labs-capability-edges.yml
+  name: Cognition Labs Business Capability Map
 
 apis:
 - aid: cognition-labs:cognition-labs-attachments-api
@@ -162,8 +165,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -221,8 +223,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -280,8 +281,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -339,8 +339,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -406,8 +405,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -465,8 +463,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -528,8 +525,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -591,8 +587,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -654,8 +649,7 @@ apis:
   - type: OpenCollection
     url: collections/cognition-labs.opencollection.json
   - type: APIReference
-    url: >-
-      https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
+    url: https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session
   - type: APIReference
     url: https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages
   - type: APIReference
@@ -722,9 +716,11 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/cognition-labs-audit-logs-api-openapi.yml
+
 x-parent: cognition
 
 x-relationship: product
+
 x-enrichment:
   date: '2026-10-04'
   status: enriched
