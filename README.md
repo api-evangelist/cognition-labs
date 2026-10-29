@@ -1,4 +1,4 @@
-# Cognition Labs (cognition-labs)
+# Cognition Labs
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,232 +66,171 @@
 
 Cognition Labs is the applied AI lab behind Devin, the autonomous AI software engineer that plans, writes, tests, and ships code inside its own shell, code editor, and browser. The Devin API lets teams create and drive Devin sessions programmatically - sending prompts and follow-up messages, attaching files, storing organizational knowledge and reusable playbooks, injecting secrets, and tracking Agent Compute Unit (ACU) consumption - across a legacy v1 surface, a v2 enterprise surface, and a current v3 organizations/enterprise surface built around service-user and personal access tokens.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/cognition-labs/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/cognition-labs/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · AI Agents · Autonomous Coding · Software Engineering · LLM · Devin
 
-## Tags
+## Cognition Labs on APIs.io
 
-- AI
-- AI Agent
-- Autonomous Coding
-- Software Engineering
-- LLM
-- Devin
+Everything profiled for Cognition Labs is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cognition-labs/](https://apis.io/providers/cognition-labs/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (11)
 
-- **Created:** 2026-07-02
-- **Modified:** 2026-07-02
+- [Cognition Labs Attachments API](https://apis.io/apis/cognition-labs/cognition-labs-attachments-api/) — Upload and download files for Devin to work with.
+- [Cognition Labs Consumption API](https://apis.io/apis/cognition-labs/cognition-labs-consumption-api/) — Agent Compute Unit (ACU) usage and billing metrics.
+- [Cognition Labs Enterprise (v3) API](https://apis.io/apis/cognition-labs/cognition-labs-enterprise-v3-api/) — Cross-organization administration.
+- [Cognition Labs Knowledge API](https://apis.io/apis/cognition-labs/cognition-labs-knowledge-api/) — Organization knowledge entries and folders.
+- [Cognition Labs Messages API](https://apis.io/apis/cognition-labs/cognition-labs-messages-api/) — Send and read messages within a running session.
+- [Cognition Labs Organizations (v3) API](https://apis.io/apis/cognition-labs/cognition-labs-organizations-v3-api/) — Current org-scoped session and user management.
+- [Cognition Labs Playbooks API](https://apis.io/apis/cognition-labs/cognition-labs-playbooks-api/) — Reusable team playbooks that seed new sessions.
+- [Cognition Labs Secrets API](https://apis.io/apis/cognition-labs/cognition-labs-secrets-api/) — Encrypted credentials Devin can use inside sessions.
+- [Cognition Labs Sessions API](https://apis.io/apis/cognition-labs/cognition-labs-sessions-api/) — Create and manage Devin sessions (v1 legacy surface).
+- [Cognition Labs Enterprise API](https://apis.io/apis/cognition-labs/cognition-labs-enterprise-api/) — Operations for enterprise-specific features and reporting
+- [Cognition Labs Audit Logs API](https://apis.io/apis/cognition-labs/cognition-labs-audit-logs-api/) — Operations for managing audit logs
 
-## APIs
+### Published properties
 
-### Devin Sessions API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create a Devin session with a natural-language prompt and optional playbook, snapshot, knowledge, secrets, tags, and a max ACU cap; list sessions with filters; retrieve full session status and structured output; update tags; and terminate a running session.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session](https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session)
-- **Base URL:** `https://api.devin.ai/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Cognition Labs Agentic Access](https://apis.io/agentic-access/cognition-labs/cognition-labs-agentic-access/)
 
-- Sessions
-- Agent
-- Tasks
+#### JSON Schema (11)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://docs.devin.ai/api-reference/overview)
-- [API Reference](https://docs.devin.ai/api-reference/v1/sessions/create-a-new-devin-session)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [CreateSessionInput](https://apis.io/schemas/cognition-labs/cognition-labs-create-session-input/)
+- [CreateSessionResponse](https://apis.io/schemas/cognition-labs/cognition-labs-create-session-response/)
+- [KnowledgeEntry](https://apis.io/schemas/cognition-labs/cognition-labs-knowledge-entry/)
+- [KnowledgeFolder](https://apis.io/schemas/cognition-labs/cognition-labs-knowledge-folder/)
+- [KnowledgeInput](https://apis.io/schemas/cognition-labs/cognition-labs-knowledge-input/)
+- [Playbook](https://apis.io/schemas/cognition-labs/cognition-labs-playbook/)
+- [PlaybookInput](https://apis.io/schemas/cognition-labs/cognition-labs-playbook-input/)
+- [SecretInput](https://apis.io/schemas/cognition-labs/cognition-labs-secret-input/)
+- [SecretMetadata](https://apis.io/schemas/cognition-labs/cognition-labs-secret-metadata/)
+- [SessionDetail](https://apis.io/schemas/cognition-labs/cognition-labs-session-detail/)
+- [SessionSummary](https://apis.io/schemas/cognition-labs/cognition-labs-session-summary/)
 
-### Devin Messages API
+#### JSON-LD (1)
 
-Send follow-up messages into a running Devin session to steer, correct, or add context to its work, and list the message history of a session. The session must be in a running state to receive a message; sending a message also wakes a sleeping session.
+Linked-data contexts for the provider's vocabulary.
 
-- **Human URL:** [https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session](https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session)
-- **Base URL:** `https://api.devin.ai/v1`
+- [Cognition Labs Context](https://apis.io/jsonld/cognition-labs/cognition-labs-context/)
 
-#### Tags
+#### Collections (10)
 
-- Messages
-- Sessions
-- Conversational
+Postman and Open Collection request collections.
 
-#### Properties
+- [Devin API (Cognition Labs)](https://apis.io/collections/cognition-labs/open-cognition-labs/)
+- [Devin API (Cognition Labs) Attachments API](https://apis.io/collections/cognition-labs/open-cognition-labs-attachments-api/)
+- [Devin API (Cognition Labs) Attachments Consumption API](https://apis.io/collections/cognition-labs/open-cognition-labs-consumption-api/)
+- [Devin API (Cognition Labs) Attachments Enterprise (v3) API](https://apis.io/collections/cognition-labs/open-cognition-labs-enterprise-v3-api/)
+- [Devin API (Cognition Labs) Attachments Knowledge API](https://apis.io/collections/cognition-labs/open-cognition-labs-knowledge-api/)
+- [Devin API (Cognition Labs) Attachments Messages API](https://apis.io/collections/cognition-labs/open-cognition-labs-messages-api/)
+- [Devin API (Cognition Labs) Attachments Organizations (v3) API](https://apis.io/collections/cognition-labs/open-cognition-labs-organizations-v3-api/)
+- [Devin API (Cognition Labs) Attachments Playbooks API](https://apis.io/collections/cognition-labs/open-cognition-labs-playbooks-api/)
+- [Devin API (Cognition Labs) Attachments Secrets API](https://apis.io/collections/cognition-labs/open-cognition-labs-secrets-api/)
+- [Devin API (Cognition Labs) Attachments Sessions API](https://apis.io/collections/cognition-labs/open-cognition-labs-sessions-api/)
 
-- [API Reference](https://docs.devin.ai/api-reference/v1/sessions/send-a-message-to-an-existing-devin-session)
-- [API Reference](https://docs.devin.ai/api-reference/v3/sessions/post-organizations-sessions-messages)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### Devin Attachments API
+Spectral rulesets for the provider's contracts.
 
-Upload files (multipart/form-data) for Devin to work with, receiving back a file URL that is referenced in a session prompt as `ATTACHMENT:"{file_url}"`, and download attachment files by ID.
+- [Cognition Labs API Rules](https://apis.io/rules/cognition-labs/cognition-labs-rules/)
 
-- **Human URL:** [https://docs.devin.ai/api-reference/v1/attachments/upload-files-for-devin-to-work-with](https://docs.devin.ai/api-reference/v1/attachments/upload-files-for-devin-to-work-with)
-- **Base URL:** `https://api.devin.ai/v1`
+#### Security (4)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Attachments
-- Files
-- Uploads
+- [Cognition Labs Authentication](https://apis.io/security/cognition-labs/cognition-labs-authentication/)
+- [Cognition Labs Domain Security](https://apis.io/security/cognition-labs/cognition-labs-domain-security/)
+- [Cognition Labs Trust Center](https://apis.io/security/cognition-labs/cognition-labs-trust-center/)
+- [Cognition Labs Vulnerability Disclosure](https://apis.io/security/cognition-labs/cognition-labs-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [API Reference](https://docs.devin.ai/api-reference/v1/attachments/upload-files-for-devin-to-work-with)
-- [API Reference](https://docs.devin.ai/api-reference/v1/attachments/download-attachment-files)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Devin Knowledge API
+- [Cognition Labs Plans Pricing](https://apis.io/plans/cognition-labs/cognition-labs-plans-pricing/)
 
-Create, list, update, and delete organization-level knowledge entries and folders - persistent notes with a trigger description that Devin automatically pulls into relevant sessions - plus enterprise-level knowledge notes on the v3 surface.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.devin.ai/api-reference/v1/knowledge/list-knowledge](https://docs.devin.ai/api-reference/v1/knowledge/list-knowledge)
-- **Base URL:** `https://api.devin.ai/v1`
+Published request limits.
 
-#### Tags
+- [Cognition Labs Rate Limits](https://apis.io/rate-limits/cognition-labs/cognition-labs-rate-limits/)
 
-- Knowledge
-- Context
-- Organization
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [API Reference](https://docs.devin.ai/api-reference/v1/knowledge/list-knowledge)
-- [API Reference](https://docs.devin.ai/api-reference/v1/knowledge/create-knowledge)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Cognition Labs Finops](https://apis.io/finops/cognition-labs/cognition-labs-finops/)
 
-### Devin Playbooks API
+## Where to find this API
 
-Create, retrieve, list, update, and delete team playbooks - reusable, named instruction sets that seed new Devin sessions via a `playbook_id` so recurring tasks run the same way every time.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.devin.ai/api-reference/v1/playbooks/list-playbooks](https://docs.devin.ai/api-reference/v1/playbooks/list-playbooks)
-- **Base URL:** `https://api.devin.ai/v1`
-
-#### Tags
-
-- Playbooks
-- Workflows
-- Automation
-
-#### Properties
-
-- [API Reference](https://docs.devin.ai/api-reference/v1/playbooks/list-playbooks)
-- [API Reference](https://docs.devin.ai/api-reference/v1/playbooks/create-playbook)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Devin Secrets API
-
-Create, list, and delete organization secrets (cookie, key-value, dictionary, or TOTP types) that Devin can use inside sessions without exposing values back over the API; list responses return metadata only. Org-level secrets are also managed on the v3 surface.
-
-- **Human URL:** [https://docs.devin.ai/api-reference/v1/secrets/list-secrets](https://docs.devin.ai/api-reference/v1/secrets/list-secrets)
-- **Base URL:** `https://api.devin.ai/v1`
-
-#### Tags
-
-- Secrets
-- Credentials
-- Security
-
-#### Properties
-
-- [API Reference](https://docs.devin.ai/api-reference/v1/secrets/list-secrets)
-- [API Reference](https://docs.devin.ai/api-reference/v1/secrets/create-secret)
-- [Documentation](https://docs.devin.ai/admin/security)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Devin Organizations API
-
-Current (v3) organization-scoped surface at `/v3/organizations/{org_id}` - create and manage sessions with optional user attribution, list/invite/delete organization users, and reach the same knowledge, playbooks, and secrets resources under RBAC with service-user (`cog_`) or personal access tokens.
-
-- **Human URL:** [https://docs.devin.ai/api-reference/v3/overview](https://docs.devin.ai/api-reference/v3/overview)
-- **Base URL:** `https://api.devin.ai/v3`
-
-#### Tags
-
-- Organizations
-- Users
-- RBAC
-
-#### Properties
-
-- [Documentation](https://docs.devin.ai/api-reference/v3/overview)
-- [Documentation](https://docs.devin.ai/api-reference/getting-started/teams-quickstart)
-- [API Reference](https://docs.devin.ai/api-reference/v3/users/members-users)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Devin Enterprise API
-
-Cross-organization administration at `/v3/enterprise` and the v2 enterprise surface - create, list, update, and delete organizations and their members, provision and revoke service API keys, list/inspect sessions and their insights across every organization, and retrieve paginated audit logs.
-
-- **Human URL:** [https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart](https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart)
-- **Base URL:** `https://api.devin.ai/v3`
-
-#### Tags
-
-- Enterprise
-- Admin
-- Audit Logs
-
-#### Properties
-
-- [Documentation](https://docs.devin.ai/api-reference/getting-started/enterprise-quickstart)
-- [API Reference](https://docs.devin.ai/api-reference/v2/organizations/list-organizations)
-- [API Reference](https://docs.devin.ai/api-reference/v2/api-keys/list-enterprise-api-keys)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Devin Usage & Consumption API
-
-Read enterprise- and session-level Agent Compute Unit (ACU) consumption - daily totals across an enterprise, per-organization and per-user daily consumption, and per-session usage/insights metrics - for chargeback, budgeting, and enforcing per-organization consumption caps.
-
-- **Human URL:** [https://docs.devin.ai/admin/billing/usage](https://docs.devin.ai/admin/billing/usage)
-- **Base URL:** `https://api.devin.ai/v3`
-
-#### Tags
-
-- Usage
-- ACU
-- Billing
-
-#### Properties
-
-- [Documentation](https://docs.devin.ai/admin/billing/usage)
-- [Documentation](https://docs.devin.ai/admin/billing/enterprise)
-- [API Reference](https://docs.devin.ai/api-reference/v3/consumption/consumption-daily)
-- [OpenAPI](openapi/cognition-labs-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/cognition-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/cognition-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/CognitionAI)
-- [LinkedIn](https://www.linkedin.com/company/cognition-ai-labs)
 - [Website](https://cognition.ai/)
 - [Documentation](https://docs.devin.ai)
-- [Plans](plans/cognition-labs-plans-pricing.yml)
-- [Rate Limits](rate-limits/cognition-labs-rate-limits.yml)
-- [Fin Ops](finops/cognition-labs-finops.yml)
+- [Getting started](https://docs.devin.ai/tutorial-library/repo-setup)
+- [API reference](https://docs.devin.ai/llms.txt)
+- [Blog](https://cognition.com/blog)
+- [Security](https://cognition.com/legal/security)
+- [Compliance](https://trust.cognition.ai/)
+- [Privacy policy](https://cognition.com/legal/privacy-policy)
+- [GitHub](https://github.com/CognitionAI)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 52.3** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Notes
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 68.3 |
+| Contract governance | 35.6 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 53.0 |
+| Access clarity | 34.2 |
 
-Devin's API spans three overlapping generations of surface: a legacy **v1** API (`api.devin.ai/v1`, keys prefixed `apk_user_`/`apk_`) covering sessions, messages, attachments, knowledge, playbooks, and secrets; a **v2** enterprise API layered on top for organizations, members, API keys, and consumption; and the current **v3** API (`api.devin.ai/v3`, keys prefixed `cog_`) that re-platforms the same resources under `/v3/organizations/{org_id}` and `/v3/enterprise` with RBAC and pagination. All three generations remain live and documented as of this review. Every endpoint modeled here is read directly from Cognition's public documentation at [docs.devin.ai](https://docs.devin.ai); actually calling most of them requires an active paid Devin plan or Enterprise contract to obtain a service-user or personal access token, so nothing here was live-tested against production credentials.
+**Agent readiness 34.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | verified |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 29.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cognition-labs/](https://apis.io/providers/cognition-labs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cognition Labs: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cognition-labs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
